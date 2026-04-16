@@ -1,6 +1,10 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+  readonly VITE_CITADEL_ORIGIN?: string
+  readonly VITE_REFERRALS_ORIGIN?: string
+  readonly VITE_USA_ORIGIN?: string
+  readonly VITE_MEDIA_ORIGIN?: string
   readonly VITE_ADSENSE_SLOT_TOP_BANNER?: string
   readonly VITE_ADSENSE_SLOT_STICKY_HEADER?: string
   readonly VITE_ADSENSE_SLOT_IN_CONTENT?: string
