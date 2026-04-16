@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=theunitedstates-site"
+    "deploy": "node scripts/cf-pages-deploy.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
