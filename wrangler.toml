@@ -1,8 +1,3 @@
-# Cloudflare Pages — build output from Vite
 name = "theunitedstates-site"
+compatibility_date = "2024-11-01"
 pages_build_output_dir = "dist"
-compatibility_date = "2025-04-01"
-
-[vars]
-# Optional: set in Cloudflare dashboard for production
-# ENVIRONMENT = "production"
