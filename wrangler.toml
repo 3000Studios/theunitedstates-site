@@ -1,3 +1,5 @@
+# Cloudflare Pages — attach custom hostname theunitedstates.sites under
+# Dashboard → Workers & Pages → this project → Custom domains.
 name = "theunitedstates-site"
 compatibility_date = "2024-11-01"
 pages_build_output_dir = "dist"

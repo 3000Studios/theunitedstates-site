@@ -1,4 +1,4 @@
-# The United States Site (`theunitedstates.site`)
+# The United States Site (`theunitedstates.sites`)
 
 Production-oriented React + Vite + Tailwind site for Cloudflare Pages: news-style UX, monetization surfaces, SEO scaffolding, and a scalable article layer (seed content + hourly generator simulation).
 
@@ -43,7 +43,7 @@ Prerequisites:
    - **Build command**: `npm run build`
    - **Build output directory**: `dist`
 4. Add environment variables from `.env.example` as needed.
-5. Attach custom domain `theunitedstates.site` in the Pages project → **Custom domains**.
+5. Attach custom domain `theunitedstates.sites` in the Pages project → **Custom domains** (DNS proxied through Cloudflare).
 
 ### Option B — Direct upload with Wrangler
 

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE = 'https://theunitedstates.site'
+const SITE = 'https://theunitedstates.sites'
 
 interface Props {
   title: string

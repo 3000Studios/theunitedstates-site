@@ -82,8 +82,8 @@ export function HomePage() {
           '@context': 'https://schema.org',
           '@type': 'NewsMediaOrganization',
           name: 'The United States Site',
-          url: 'https://theunitedstates.site/',
-          logo: 'https://theunitedstates.site/favicon.svg',
+          url: 'https://theunitedstates.sites/',
+          logo: 'https://theunitedstates.sites/favicon.svg',
         }}
       />
 

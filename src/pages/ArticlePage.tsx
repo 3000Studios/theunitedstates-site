@@ -28,11 +28,11 @@ export function ArticlePage() {
       name: 'The United States Site',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://theunitedstates.site/favicon.svg',
+        url: 'https://theunitedstates.sites/favicon.svg',
       },
     },
     description: article.seoDescription,
-    mainEntityOfPage: `https://theunitedstates.site/article/${article.slug}`,
+    mainEntityOfPage: `https://theunitedstates.sites/article/${article.slug}`,
   }
 
   return (
