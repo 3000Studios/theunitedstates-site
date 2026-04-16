@@ -1,0 +1,430 @@
+import type { Article } from '@/lib/types'
+
+const Y = new Date().getFullYear()
+
+export const SEED_ARTICLES: Article[] = [
+  {
+    id: 'a1',
+    slug: 'best-states-to-live-2026',
+    title: `Best States to Live in ${Y}: Quality, Cost, and Opportunity`,
+    excerpt:
+      'A practical, data-informed look at where Americans are finding balance between wages, housing, safety, and lifestyle—without the hype.',
+    paragraphs: [
+      `Choosing where to live in ${Y} is less about chasing a single ranking and more about matching your priorities to reality. A state that looks “#1” on a spreadsheet can feel wrong if your industry, family needs, or climate preferences do not align.`,
+      'Start with the basics you can measure: median housing costs relative to typical incomes in your field, state and local tax load, healthcare access, and commute patterns in the metro you are targeting—not just statewide averages.',
+      'States across the Mountain West and parts of the Southeast continue to draw interest for growth-friendly business climates and newer housing supply, while several Northeast and Pacific hubs remain strong for career ceiling and cultural amenities—often with higher costs.',
+      'Midwestern states can offer surprising value: strong schools, community stability, and lower housing stress, especially in metros investing in remote-work infrastructure and downtown revitalization.',
+      'Before you decide, visit twice if you can—once in ideal weather and once in the off-season. Talk to locals in your industry, compare insurance costs (auto and home can swing widely), and model a monthly budget with real rent or mortgage quotes.',
+      'No list can pick your life for you. Use rankings as a compass, then validate with neighborhood-level research, employer demand, and your own non‑negotiables. That is how smart relocations actually succeed.',
+    ],
+    category: 'states',
+    author: 'Morgan Ellis',
+    publishedAt: '2026-01-08T14:00:00.000Z',
+    updatedAt: '2026-04-01T10:00:00.000Z',
+    readTimeMinutes: 9,
+    image:
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash / Daniel J. Schwarz',
+    tags: ['states', 'relocation', 'cost of living', 'rankings'],
+    seoTitle: `Best States to Live in ${Y} | The United States Site`,
+    seoDescription:
+      'Compare states by cost, opportunity, and lifestyle with an advertiser-safe, practical framework for American readers.',
+    featured: true,
+  },
+  {
+    id: 'a2',
+    slug: 'how-americans-make-money-online',
+    title: 'How Americans Are Making Money Online Right Now',
+    excerpt:
+      'Realistic online income paths—from freelancing and digital products to content and ecommerce—with honest expectations.',
+    paragraphs: [
+      'The phrase “make money online” is overloaded. For most people, sustainable income still looks like selling a skill, a service, or a product—just delivered through digital channels.',
+      'Freelance writing, design, software, and virtual assistance remain common on-ramps because they monetize expertise employers already recognize. Marketplaces can help you start, but long-term winners usually build direct client relationships.',
+      'Digital products—templates, courses, and tools—can scale, but only when they solve a painful problem. Expect iteration: your first launch is a learning exercise, not a lottery ticket.',
+      'Ecommerce and resale work when you understand margins, shipping, returns, and ad costs. If you go this route, keep ruthless bookkeeping from day one.',
+      'Creator platforms can monetize attention, but CPMs and algorithm shifts make diversification essential. Treat platform income as a channel, not a guarantee.',
+      'Protect yourself: watch for scams that promise guaranteed returns, never pay upfront for “exclusive programs,” and consult a tax professional if you cross state lines or handle high transaction volume.',
+    ],
+    category: 'money',
+    author: 'Jordan Lee',
+    publishedAt: '2026-02-12T16:30:00.000Z',
+    updatedAt: '2026-04-02T09:15:00.000Z',
+    readTimeMinutes: 10,
+    image:
+      'https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageCredit: 'Pexels',
+    tags: ['online income', 'freelancing', 'side hustles'],
+    seoTitle: 'How Americans Make Money Online | The United States Site',
+    seoDescription:
+      'Explore realistic ways Americans earn online income in 2026, including freelancing, ecommerce, and digital products.',
+    featured: true,
+  },
+  {
+    id: 'a3',
+    slug: 'top-cities-for-opportunity',
+    title: 'Top 10 Cities for Opportunity in the USA',
+    excerpt:
+      'A balanced snapshot of metros combining job growth, startup activity, and livability—plus what to verify before moving.',
+    paragraphs: [
+      '“Opportunity” is multidimensional. A city can be exceptional for tech hiring yet challenging for housing, or great for small business but thin in your specific trade.',
+      'Readers often look at Sun Belt growth markets where corporate relocations and infrastructure investment expand job pipelines. Meanwhile, established coastal hubs still lead in certain finance, media, and biotech clusters.',
+      'In the Midwest, several regional hubs punch above their weight on affordability and talent, especially for hybrid and remote-first employers building distributed teams.',
+      'When evaluating a city, use three checks: (1) job postings in your role, (2) rent or mortgage stress at local wages, (3) transportation and childcare logistics.',
+      'Smaller cities can win on speed—shorter commutes, easier networking, tighter communities—while larger metros win on depth of industry and specialization.',
+      'Treat lists like this as a starting itinerary, not a verdict. Your best city is where your skills, network, and family constraints intersect—mapped onto real neighborhoods, not just headlines.',
+    ],
+    category: 'trending',
+    author: 'Priya Nandakumar',
+    publishedAt: '2026-01-22T13:10:00.000Z',
+    updatedAt: '2026-03-18T11:00:00.000Z',
+    readTimeMinutes: 8,
+    image:
+      'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['cities', 'jobs', 'relocation'],
+    seoTitle: 'Top US Cities for Opportunity | The United States Site',
+    seoDescription:
+      'Discover US cities combining job growth and livability, with a practical checklist for movers and career switchers.',
+    featured: true,
+  },
+  {
+    id: 'a4',
+    slug: 'side-hustles-that-work',
+    title: 'Side Hustles That Actually Work (and How to Choose One)',
+    excerpt:
+      'Skip the gimmicks. Here is how to pick a side hustle based on time, skill fit, and legal/tax realities.',
+    paragraphs: [
+      'A workable side hustle fits your calendar without torching your health. If it needs 40 hours to start, it is a second job—plan accordingly.',
+      'Service businesses often monetize fastest because customers pay for outcomes: repairs, tutoring, pet care, admin support, and creative production.',
+      'Productized services—fixed packages with clear deliverables—reduce back-and-forth and make marketing simpler on short-form video and local listings.',
+      'Reselling can work if you understand demand cycles and platform fees. Start with categories you already know; obscure niches beat random thrifting for beginners.',
+      'Content-driven hustles require consistency. If you will not publish weekly for six months, choose a different path.',
+      'Taxes matter. Open a separate checking bucket, track mileage, and set aside a percentage for self-employment obligations. When in doubt, hire a CPA—especially after your first $10k.',
+    ],
+    category: 'money',
+    author: 'Chris Alvarez',
+    publishedAt: '2026-03-01T09:00:00.000Z',
+    updatedAt: '2026-04-01T08:00:00.000Z',
+    readTimeMinutes: 9,
+    image:
+      'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageCredit: 'Pexels',
+    tags: ['side hustle', 'freelancing', 'business'],
+    seoTitle: 'Side Hustles That Work | The United States Site',
+    seoDescription:
+      'Learn how to choose a realistic side hustle based on skills, schedule, and compliance—without risky get-rich promises.',
+    featured: false,
+  },
+  {
+    id: 'a5',
+    slug: 'cost-of-living-breakdown-usa',
+    title: 'Cost of Living Breakdown: What American Households Pay For',
+    excerpt:
+      'Housing, transportation, food, insurance—here is how typical budgets behave, and where to find leverage.',
+    paragraphs: [
+      'Most American households feel the budget in four places: housing, transportation, food, and insurance. Small improvements in each category compound quickly.',
+      'Housing is the largest lever. Even a 10–15% reduction in monthly housing cost can fund debt payoff, savings, or career runway—especially early in your working life.',
+      'Transportation costs often surprise people who “saved” on rent by moving far from work. Total commute time, fuel, tolls, and vehicle wear matter.',
+      'Food is the fastest category to optimize without sacrificing health: meal planning, batch cooking, and reducing delivery fees frequently recover hundreds monthly.',
+      'Insurance is a quiet leak. Shop policies annually, bundle carefully, and raise deductibles only when you have the savings to absorb them.',
+      'If you want a simple rule: track spending for 30 days, categorize ruthlessly, then attack the top three lines—not the coffee cups—first.',
+    ],
+    category: 'guides',
+    author: 'Taylor Brooks',
+    publishedAt: '2026-02-02T12:00:00.000Z',
+    updatedAt: '2026-03-29T15:20:00.000Z',
+    readTimeMinutes: 8,
+    image:
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['budget', 'household', 'finance'],
+    seoTitle: 'USA Cost of Living Breakdown | The United States Site',
+    seoDescription:
+      'Understand the major drivers of American household spending and where to optimize responsibly.',
+    featured: false,
+  },
+  {
+    id: 'a6',
+    slug: 'remote-work-trends',
+    title: 'Remote Work Trends: What Stuck—and What Reverted',
+    excerpt:
+      'Hybrid schedules, policy whiplash, and the new etiquette of distributed teams in American workplaces.',
+    paragraphs: [
+      'Remote work did not “end,” but it normalized into a spectrum. Many employers settled on hybrid patterns tied to team coordination, customer expectations, and industry norms.',
+      'Knowledge workers saw the clearest gains: reduced commute stress and wider employer choice. Employers gained access to talent far beyond HQ radius—when onboarding and documentation keep pace.',
+      'Challenges remain: visibility bias, uneven home offices, time-zone friction, and the difficulty of training junior staff remotely without intentional design.',
+      'Job seekers should read hybrid policies carefully: “flexible” can mean three mandated office days, core hours across time zones, or quarterly onsites.',
+      'For workers, the winning move is to document impact clearly—outcomes over hours—and build relationships intentionally through short, purposeful video touchpoints.',
+      'Looking ahead, the competitive advantage belongs to teams that write well, ship predictably, and use meetings sparingly—remote or not.',
+    ],
+    category: 'tech',
+    author: 'Samira Hosseini',
+    publishedAt: '2026-01-30T10:45:00.000Z',
+    updatedAt: '2026-04-03T12:10:00.000Z',
+    readTimeMinutes: 8,
+    image:
+      'https://images.pexels.com/photos/4050320/pexels-photo-4050320.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageCredit: 'Pexels',
+    tags: ['remote work', 'careers', 'hybrid'],
+    seoTitle: 'Remote Work Trends in the USA | The United States Site',
+    seoDescription:
+      'Explore how remote and hybrid work evolved for US employers and employees, with practical career takeaways.',
+    featured: true,
+  },
+  {
+    id: 'a7',
+    slug: 'public-programs-simplified',
+    title: 'Government and Public Programs: A Plain-English Starting Guide',
+    excerpt:
+      'Nonpartisan orientation to how people commonly interact with public services—without legal advice.',
+    paragraphs: [
+      'Public programs can feel like alphabet soup. Most people encounter them around education funding, healthcare access, small business resources, and disaster assistance—each with different eligibility rules.',
+      'The best first step is identifying the administering level: federal, state, county, or municipal. Many applications fail because the right door was never opened.',
+      'Official .gov websites and state portals are your primary sources. Be cautious of third-party sites that charge fees for free forms.',
+      'If you need help, look for nonprofit navigators, public libraries, and community organizations that specialize in enrollment—not random paid “consultants.”',
+      'Deadlines and income thresholds change. Bookmark primary sources and verify details quarterly if you rely on a program.',
+      'This article is informational, not legal advice. For complex situations—immigration, disability claims, or business compliance—consult a licensed professional.',
+    ],
+    category: 'news',
+    author: 'Editorial Desk',
+    publishedAt: '2026-02-18T08:00:00.000Z',
+    updatedAt: '2026-03-27T09:00:00.000Z',
+    readTimeMinutes: 7,
+    image:
+      'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['public info', 'how-to', 'usa'],
+    seoTitle: 'US Public Programs: Plain English Guide | The United States Site',
+    seoDescription:
+      'A neutral, practical orientation to navigating US public services and finding official information sources.',
+    featured: false,
+  },
+  {
+    id: 'a8',
+    slug: 'tech-skills-in-demand',
+    title: 'Tech Skills in Demand Across the United States',
+    excerpt:
+      'From cloud fundamentals to data literacy—what hiring managers signal in 2026 and how to learn efficiently.',
+    paragraphs: [
+      'Tech hiring rewards fundamentals: version control, testing discipline, observability, and security awareness. Flashy frameworks matter less than reliable delivery.',
+      'Cloud literacy—networking, IAM concepts, and cost awareness—shows up across roles, not only for engineers.',
+      'Data skills scale with business impact: SQL, visualization, and clear experimentation beat buzzword-heavy résumés.',
+      'Cybersecurity basics are now general education: phishing resistance, device hygiene, and sane backup practices.',
+      'Learning paths work best project-first: build a small but real system, document it, and publish a case study recruiters can skim.',
+      'If you are switching careers, combine coursework with volunteer builds for local nonprofits—credibility compounds when people can see your work.',
+    ],
+    category: 'tech',
+    author: 'Alex Park',
+    publishedAt: '2026-03-05T14:20:00.000Z',
+    updatedAt: '2026-04-04T10:00:00.000Z',
+    readTimeMinutes: 8,
+    image:
+      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['tech jobs', 'skills', 'careers'],
+    seoTitle: 'In-Demand Tech Skills in the USA | The United States Site',
+    seoDescription:
+      'See which technology skills US employers emphasize and how to learn them with project-based credibility.',
+    featured: false,
+  },
+  {
+    id: 'a9',
+    slug: 'american-road-trip-guide',
+    title: 'The Great American Road Trip: Planning Tips That Save Time and Money',
+    excerpt:
+      'Route planning, vehicle prep, and national park etiquette for memorable, low-stress travel.',
+    paragraphs: [
+      'Road trips succeed when logistics are boring: reliable tires, fresh fluids, and a realistic daily drive limit beat heroic marathon days.',
+      'Book popular parks and lodging early, especially near holidays. Have a Plan B town 60–90 minutes away for busy weekends.',
+      'Pack layers, not outfits. Weather swings are normal—mountains, coasts, and deserts can shift 30 degrees in a day.',
+      'Download offline maps, keep water and snacks, and avoid driving tired—hotel costs are cheaper than hospital bills.',
+      'Respect trail closures and wildlife distance rules. The best photos are the safe ones.',
+      'Finally, leave margin. The best memories often come from unplanned stops—if your schedule has slack.',
+    ],
+    category: 'lifestyle',
+    author: 'Riley Chen',
+    publishedAt: '2026-02-25T11:00:00.000Z',
+    updatedAt: '2026-03-30T13:00:00.000Z',
+    readTimeMinutes: 7,
+    image:
+      'https://images.pexels.com/photos/2387866/pexels-photo-2387866.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageCredit: 'Pexels',
+    tags: ['travel', 'road trip', 'usa'],
+    seoTitle: 'American Road Trip Planning Guide | The United States Site',
+    seoDescription:
+      'Plan a safer, smarter US road trip with budgeting, vehicle prep, and park etiquette tips.',
+    featured: false,
+  },
+  {
+    id: 'a10',
+    slug: 'home-buying-essentials-2026',
+    title: `Home Buying Essentials for ${Y}: Rates, Offers, and Inspections`,
+    excerpt:
+      'A calm walkthrough of how buyers can reduce regret—especially in competitive but cooling markets.',
+    paragraphs: [
+      'Buying a home is a financial and lifestyle decision. Start with a verified budget: payment, taxes, insurance, maintenance, and an emergency buffer.',
+      'Get pre-approved with documentation reviewed, not just a quick estimate—sellers take stronger offers seriously when financing is credible.',
+      'Inspections are non-negotiable for most buyers. Even new builds benefit from third-party eyes—cosmetic staging hides moisture and grading issues.',
+      'Understand the seller’s motivation when you can. Terms sometimes beat price: flexible closing dates or rent-backs can win without raising bid wars.',
+      'Read HOA documents if applicable: reserves, special assessments, and rental restrictions surprise people after closing.',
+      'If something feels rushed, pause. The right home is worth waiting for; the wrong mortgage is not.',
+    ],
+    category: 'guides',
+    author: 'Morgan Ellis',
+    publishedAt: '2026-03-10T09:30:00.000Z',
+    updatedAt: '2026-04-02T16:00:00.000Z',
+    readTimeMinutes: 9,
+    image:
+      'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['real estate', 'home buying', 'finance'],
+    seoTitle: `Home Buying Essentials ${Y} | The United States Site`,
+    seoDescription:
+      'Learn home buying fundamentals for US markets: budgeting, inspections, offers, and HOA pitfalls.',
+    featured: true,
+  },
+  {
+    id: 'a11',
+    slug: 'energy-bill-smart',
+    title: 'Cut Energy Bills Without gimmicks: Insulation, Thermostats, Habits',
+    excerpt:
+      'Practical efficiency steps American households can take in any season—safe, boring, effective.',
+    paragraphs: [
+      'The fastest wins are behavioral: shorter hot showers, mindful thermostat setbacks, and eliminating “always-on” devices you forgot about.',
+      'Sealing air leaks around doors and windows is cheap and measurable. A smoke pencil or incense stick can reveal drafts in minutes.',
+      'Insulation upgrades pay off longest in climates with hot summers and cold winters—attics first, then crawl spaces.',
+      'If you upgrade appliances, compare total cost of ownership—not sticker price. Utility rebates can change the math.',
+      'Consider time-of-use rates if your utility offers them; shift laundry and dishwashing off peak when possible.',
+      'Safety first: extension cords are temporary, space heaters need clearance, and DIY electrical work is not where amateurs should experiment.',
+    ],
+    category: 'lifestyle',
+    author: 'Taylor Brooks',
+    publishedAt: '2026-01-18T13:40:00.000Z',
+    updatedAt: '2026-03-21T10:10:00.000Z',
+    readTimeMinutes: 7,
+    image:
+      'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageCredit: 'Pexels',
+    tags: ['energy', 'savings', 'home'],
+    seoTitle: 'Lower Home Energy Bills (USA) | The United States Site',
+    seoDescription:
+      'Evidence-based ways US households reduce energy bills through insulation, thermostats, and smart habits.',
+    featured: false,
+  },
+  {
+    id: 'a12',
+    slug: 'wellness-trends-that-last',
+    title: 'Wellness Trends That Actually Hold Up (Sleep, Strength, Sunlight)',
+    excerpt:
+      'Ignore fads—here is what registered dietitians, coaches, and doctors commonly agree on for long-term health.',
+    paragraphs: [
+      'Wellness marketing is loud. The quiet winners are sleep, strength training, protein adequacy, walking, and social connection—boring because they work.',
+      'Sleep is the foundation. Fixing bedtime consistency often improves focus and appetite regulation more than a new supplement.',
+      'Strength training supports metabolism, bone density, and injury resilience. You do not need a perfect program—consistency beats novelty.',
+      'Sunlight and movement breaks help mood and circadian rhythm, especially for desk workers.',
+      'Nutrition thrives on simple patterns: more whole foods, adequate fiber, hydration, and portion awareness—personalized to your culture and preferences.',
+      'Always coordinate changes with a clinician if you have medical conditions. Trends are not prescriptions.',
+    ],
+    category: 'lifestyle',
+    author: 'Jordan Lee',
+    publishedAt: '2026-02-08T15:00:00.000Z',
+    updatedAt: '2026-03-25T12:00:00.000Z',
+    readTimeMinutes: 7,
+    image:
+      'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['wellness', 'fitness', 'health'],
+    seoTitle: 'Sustainable Wellness Habits | The United States Site',
+    seoDescription:
+      'Focus on sustainable wellness habits for Americans: sleep, strength, nutrition basics, and professional guidance.',
+    featured: false,
+  },
+  {
+    id: 'a13',
+    slug: 'education-pathways-usa',
+    title: 'Education Pathways in the USA: Certificates, Degrees, and Apprenticeships',
+    excerpt:
+      'How to choose training that matches hiring reality—without drowning in debt.',
+    paragraphs: [
+      'Education is a tool. Start with the job outcomes you want, then reverse-engineer credentials employers actually reward in your region.',
+      'Community colleges and trade programs can offer fast ROI when aligned with local employer pipelines—think healthcare technicians, logistics, and advanced manufacturing.',
+      'Apprenticeships combine pay and training—ideal for learners who prefer hands-on work and structured mentorship.',
+      'Four-year degrees still matter in many professions, but “degree by default” can backfire without a plan for internships and networking.',
+      'Before borrowing, model monthly payments under realistic starting salaries. Small differences in principal change life for years.',
+      'Scholarship search is a part-time job: local civic clubs, employer tuition assistance, and state programs often beat generic national sweepstakes.',
+    ],
+    category: 'guides',
+    author: 'Priya Nandakumar',
+    publishedAt: '2026-03-14T10:00:00.000Z',
+    updatedAt: '2026-04-04T09:30:00.000Z',
+    readTimeMinutes: 8,
+    image:
+      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['education', 'careers', 'skills'],
+    seoTitle: 'US Education Pathways Guide | The United States Site',
+    seoDescription:
+      'Compare certificates, degrees, and apprenticeships with a hiring-first, debt-aware approach for US students.',
+    featured: false,
+  },
+  {
+    id: 'a14',
+    slug: 'viral-kindness-stories',
+    title: 'Why Positive Community Stories Travel Far in America',
+    excerpt:
+      'The psychology of uplifting viral content—and how local heroes get amplified safely.',
+    paragraphs: [
+      'Positive stories spread when they feel authentic and specific: a name, a place, and a relatable obstacle—not generic inspiration memes.',
+      'Local journalism and community organizers still originate many of these moments; social platforms amplify them nationally within hours.',
+      'Readers engage because the stories reinforce belonging: neighbors helping neighbors, small businesses stepping up, students leading service projects.',
+      'If you share, verify: scams occasionally exploit goodwill. Link to primary sources when possible.',
+      'Want to participate? Start small: mutual aid networks, mentorship, and predictable volunteering beat one-off viral stunts.',
+      'America’s cultural tapestry is loud online—but kindness still trends when it is real.',
+    ],
+    category: 'trending',
+    author: 'Editorial Desk',
+    publishedAt: '2026-03-20T18:00:00.000Z',
+    updatedAt: '2026-04-04T11:00:00.000Z',
+    readTimeMinutes: 6,
+    image:
+      'https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageCredit: 'Pexels',
+    tags: ['community', 'culture', 'usa'],
+    seoTitle: 'Positive American Community Stories | The United States Site',
+    seoDescription:
+      'Explore why authentic community stories resonate across the US and how to engage responsibly online.',
+    featured: false,
+  },
+  {
+    id: 'a15',
+    slug: 'breaking-news-safety-net',
+    title: 'How to Read Breaking News Without Getting Burned Out',
+    excerpt:
+      'A mindful approach to staying informed—fast when it matters, quiet when it does not.',
+    paragraphs: [
+      'Breaking news cycles reward speed, not serenity. Protect your attention by choosing a small set of trusted outlets and official channels for emergencies.',
+      'Use lateral reading: verify unfamiliar claims across independent sources before resharing—especially screenshots.',
+      'Batch your news: two check-ins daily beats endless scrolling. Your nervous system will thank you.',
+      'Local alerts matter most for weather, transit, and safety—enable them thoughtfully and mute redundant apps.',
+      'Teach kids the same habits: differentiate between rumor, report, and opinion.',
+      'Staying informed is patriotic; staying chronically overloaded helps no one. Build boundaries like any other wellness practice.',
+    ],
+    category: 'news',
+    author: 'Samira Hosseini',
+    publishedAt: '2026-04-01T12:00:00.000Z',
+    updatedAt: '2026-04-04T12:00:00.000Z',
+    readTimeMinutes: 6,
+    image:
+      'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80',
+    imageCredit: 'Unsplash',
+    tags: ['news', 'media literacy', 'wellbeing'],
+    seoTitle: 'Healthy Breaking News Habits | The United States Site',
+    seoDescription:
+      'Learn practical habits for consuming breaking news in the US without burnout—verification tips included.',
+    featured: true,
+  },
+]
+
+export function articleBySlug(slug: string): Article | undefined {
+  return SEED_ARTICLES.find((a) => a.slug === slug)
+}
