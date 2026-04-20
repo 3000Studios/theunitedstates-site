@@ -17,5 +17,4 @@ bindings = [
 
 [[migrations]]
 tag = "v1"
-new_classes = ["ContentStore"]
-
+new_sqlite_classes = ["ContentStore"]
