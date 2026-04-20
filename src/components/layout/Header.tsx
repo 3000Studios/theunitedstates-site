@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { NAV_ITEMS } from '@/data/navigation'
 import { AdSlot } from '@/components/ads/AdSlot'
+import { WireframeMark } from '@/components/brand/WireframeMark'
+import { FlagHamburger } from '@/components/brand/FlagHamburger'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -46,15 +48,13 @@ export function Header() {
 
         <div className="flex items-center gap-3 py-3">
           <Link to="/" className="group flex items-center gap-2">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0a1f44] to-sky-700 shadow-lg shadow-sky-900/40 ring-1 ring-white/10">
-              <span className="text-lg font-black text-white">US</span>
-            </span>
+            <WireframeMark />
             <span className="hidden flex-col leading-tight sm:flex">
               <span className="font-[family-name:var(--font-display)] text-base font-extrabold tracking-tight text-white">
-                The United States Site
+                The United States
               </span>
               <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-sky-200/70">
-                News · Opportunity · Guides
+                Travel · History · Good news
               </span>
             </span>
           </Link>
@@ -72,7 +72,7 @@ export function Header() {
           </form>
 
           <nav className="ml-auto hidden items-center gap-1 lg:flex">
-            {NAV_ITEMS.slice(0, 8).map((item) => (
+            {NAV_ITEMS.slice(0, 7).map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
@@ -85,12 +85,6 @@ export function Header() {
                 {item.label}
               </NavLink>
             ))}
-            <NavLink
-              to="/login"
-              className="ml-1 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-lg shadow-sky-900/30"
-            >
-              Sign in
-            </NavLink>
           </nav>
 
           <button
@@ -101,23 +95,7 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
           >
             <span className="sr-only">Menu</span>
-            <span className="relative block h-3.5 w-5">
-              <motion.span
-                className="absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-white"
-                animate={{ rotate: open ? 45 : 0, y: open ? 6 : 0 }}
-                transition={{ type: 'spring', stiffness: 380, damping: 26 }}
-              />
-              <motion.span
-                className="absolute left-0 top-[6px] block h-0.5 w-5 rounded-full bg-white"
-                animate={{ opacity: open ? 0 : 1, x: open ? 8 : 0 }}
-                transition={{ duration: 0.15 }}
-              />
-              <motion.span
-                className="absolute left-0 top-[12px] block h-0.5 w-5 rounded-full bg-white"
-                animate={{ rotate: open ? -45 : 0, y: open ? -6 : 0 }}
-                transition={{ type: 'spring', stiffness: 380, damping: 26 }}
-              />
-            </span>
+            <FlagHamburger open={open} />
           </button>
         </div>
       </div>
@@ -154,13 +132,6 @@ export function Header() {
                     {item.label}
                   </NavLink>
                 ))}
-                <NavLink
-                  to="/login"
-                  onClick={() => setOpen(false)}
-                  className="rounded-xl bg-white/10 px-3 py-2 text-sm font-semibold text-white"
-                >
-                  Sign in
-                </NavLink>
               </div>
             </div>
           </motion.div>

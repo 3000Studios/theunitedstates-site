@@ -5,35 +5,25 @@ export function Footer() {
     <footer className="mt-20 border-t border-white/10 bg-[#020617]/80">
       <div className="mx-auto grid max-w-[1600px] gap-10 px-4 py-12 md:grid-cols-4">
         <div>
-          <div className="font-[family-name:var(--font-display)] text-lg font-extrabold text-white">
-            The United States Site
-          </div>
+          <div className="font-[family-name:var(--font-display)] text-lg font-extrabold text-white">The United States</div>
           <p className="mt-3 text-sm leading-relaxed text-slate-300/90">
-            A modern USA hub for news, lifestyle, opportunity, and practical guides—built for clarity and speed.
+            A family-friendly USA travel and history hub: explore states, plan trips, and read uplifting updates—built for speed, trust, and advertiser safety.
           </p>
         </div>
         <div>
           <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Explore</div>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/news">
-                News
-              </Link>
+              <Link className="text-slate-200/90 hover:text-white" to="/states">States</Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/money">
-                Money / Jobs
-              </Link>
+              <Link className="text-slate-200/90 hover:text-white" to="/updates">Updates</Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/states">
-                States
-              </Link>
+              <Link className="text-slate-200/90 hover:text-white" to="/kids">Kid Zone</Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/store">
-                Store
-              </Link>
+              <Link className="text-slate-200/90 hover:text-white" to="/constitution">Constitution</Link>
             </li>
           </ul>
         </div>
@@ -70,8 +60,8 @@ export function Footer() {
         <div>
           <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Disclosure</div>
           <p className="mt-3 text-xs leading-relaxed text-slate-400">
-            We may earn commissions from qualifying purchases via affiliate links (for example, Amazon). Ads are served
-            through Google AdSense. Content is for informational purposes and is not financial or legal advice.
+            Ads may be served through Google AdSense. When affiliate programs are enabled, we may earn commissions from
+            qualifying purchases. Content is for informational purposes and is not legal advice.
           </p>
         </div>
       </div>

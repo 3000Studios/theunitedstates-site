@@ -6,25 +6,20 @@ import { ArticleProvider } from '@/context/ArticleContext'
 import { MainLayout } from '@/components/layout/MainLayout'
 
 const HomePage = lazy(async () => ({ default: (await import('@/pages/HomePage')).HomePage }))
-const NewsPage = lazy(async () => ({ default: (await import('@/pages/NewsPage')).NewsPage }))
-const TrendingPage = lazy(async () => ({ default: (await import('@/pages/TrendingPage')).TrendingPage }))
 const StatesPage = lazy(async () => ({ default: (await import('@/pages/StatesPage')).StatesPage }))
-const MoneyPage = lazy(async () => ({ default: (await import('@/pages/MoneyPage')).MoneyPage }))
-const TechPage = lazy(async () => ({ default: (await import('@/pages/TechPage')).TechPage }))
+const StatePage = lazy(async () => ({ default: (await import('@/pages/StatePage')).StatePage }))
+const UpdatesPage = lazy(async () => ({ default: (await import('@/pages/UpdatesPage')).UpdatesPage }))
+const KidsPage = lazy(async () => ({ default: (await import('@/pages/KidsPage')).KidsPage }))
+const ConstitutionPage = lazy(async () => ({ default: (await import('@/pages/ConstitutionPage')).ConstitutionPage }))
 const GuidesPage = lazy(async () => ({ default: (await import('@/pages/GuidesPage')).GuidesPage }))
-const BlogPage = lazy(async () => ({ default: (await import('@/pages/BlogPage')).BlogPage }))
-const StorePage = lazy(async () => ({ default: (await import('@/pages/StorePage')).StorePage }))
 const AboutPage = lazy(async () => ({ default: (await import('@/pages/AboutPage')).AboutPage }))
 const ContactPage = lazy(async () => ({ default: (await import('@/pages/ContactPage')).ContactPage }))
 const PrivacyPage = lazy(async () => ({ default: (await import('@/pages/PrivacyPage')).PrivacyPage }))
 const TermsPage = lazy(async () => ({ default: (await import('@/pages/TermsPage')).TermsPage }))
 const DisclaimerPage = lazy(async () => ({ default: (await import('@/pages/DisclaimerPage')).DisclaimerPage }))
 const SearchPage = lazy(async () => ({ default: (await import('@/pages/SearchPage')).SearchPage }))
-const ArticlePage = lazy(async () => ({ default: (await import('@/pages/ArticlePage')).ArticlePage }))
+const StoryPage = lazy(async () => ({ default: (await import('@/pages/StoryPage')).StoryPage }))
 const NotFoundPage = lazy(async () => ({ default: (await import('@/pages/NotFoundPage')).NotFoundPage }))
-const LoginPage = lazy(async () => ({ default: (await import('@/pages/LoginPage')).LoginPage }))
-const RegisterPage = lazy(async () => ({ default: (await import('@/pages/RegisterPage')).RegisterPage }))
-const ProfilePage = lazy(async () => ({ default: (await import('@/pages/ProfilePage')).ProfilePage }))
 
 function PageFade({ children }: { children: ReactNode }) {
   return (
@@ -53,22 +48,6 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/news"
-          element={
-            <PageFade>
-              <NewsPage />
-            </PageFade>
-          }
-        />
-        <Route
-          path="/trending"
-          element={
-            <PageFade>
-              <TrendingPage />
-            </PageFade>
-          }
-        />
-        <Route
           path="/states"
           element={
             <PageFade>
@@ -77,18 +56,34 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/money"
+          path="/states/:slug"
           element={
             <PageFade>
-              <MoneyPage />
+              <StatePage />
             </PageFade>
           }
         />
         <Route
-          path="/tech"
+          path="/updates"
           element={
             <PageFade>
-              <TechPage />
+              <UpdatesPage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/kids"
+          element={
+            <PageFade>
+              <KidsPage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/constitution"
+          element={
+            <PageFade>
+              <ConstitutionPage />
             </PageFade>
           }
         />
@@ -97,22 +92,6 @@ function AnimatedRoutes() {
           element={
             <PageFade>
               <GuidesPage />
-            </PageFade>
-          }
-        />
-        <Route
-          path="/blog"
-          element={
-            <PageFade>
-              <BlogPage />
-            </PageFade>
-          }
-        />
-        <Route
-          path="/store"
-          element={
-            <PageFade>
-              <StorePage />
             </PageFade>
           }
         />
@@ -165,38 +144,34 @@ function AnimatedRoutes() {
           }
         />
         <Route
+          path="/story/:slug"
+          element={
+            <PageFade>
+              <StoryPage />
+            </PageFade>
+          }
+        />
+
+        {/* Back-compat redirects */}
+        <Route path="/home" element={<Navigate to="/" replace />} />
+        <Route path="/blog" element={<Navigate to="/updates" replace />} />
+        <Route path="/news" element={<Navigate to="/updates" replace />} />
+        <Route path="/trending" element={<Navigate to="/updates" replace />} />
+        <Route path="/money" element={<Navigate to="/guides" replace />} />
+        <Route path="/tech" element={<Navigate to="/guides" replace />} />
+        <Route path="/store" element={<Navigate to="/about" replace />} />
+        <Route path="/login" element={<Navigate to="/" replace />} />
+        <Route path="/register" element={<Navigate to="/" replace />} />
+        <Route path="/profile" element={<Navigate to="/" replace />} />
+        <Route
           path="/article/:slug"
           element={
             <PageFade>
-              <ArticlePage />
+              <StoryPage />
             </PageFade>
           }
         />
-        <Route
-          path="/login"
-          element={
-            <PageFade>
-              <LoginPage />
-            </PageFade>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PageFade>
-              <RegisterPage />
-            </PageFade>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <PageFade>
-              <ProfilePage />
-            </PageFade>
-          }
-        />
-        <Route path="/home" element={<Navigate to="/" replace />} />
+
         <Route
           path="*"
           element={
@@ -225,7 +200,7 @@ export default function App() {
             >
               <AnimatedRoutes />
             </Suspense>
-        </MainLayout>
+          </MainLayout>
         </ArticleProvider>
       </BrowserRouter>
     </HelmetProvider>

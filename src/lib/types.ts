@@ -1,11 +1,4 @@
-export type ArticleCategory =
-  | 'news'
-  | 'lifestyle'
-  | 'money'
-  | 'trending'
-  | 'tech'
-  | 'guides'
-  | 'states'
+export type ArticleCategory = 'good_news' | 'travel' | 'history' | 'kids' | 'states'
 
 export interface Article {
   id: string
@@ -20,6 +13,9 @@ export interface Article {
   readTimeMinutes: number
   image: string
   imageCredit: string
+  sourceName?: string
+  sourceUrl?: string
+  heroVideoUrl?: string
   tags: string[]
   seoTitle: string
   seoDescription: string
@@ -39,10 +35,18 @@ export interface StoreProduct {
 
 export interface USStateInfo {
   id: string
+  slug: string
   name: string
   abbreviation: string
   capital: string
-  population: string
-  highlight: string
-  image: string
+  wikidataQid: string
+  commonsCategory: string | null
+  flagUrl: string | null
+  flagFile: string | null
+  sealUrl: string | null
+  sealFile: string | null
+  heroVideoUrl: string | null
+  heroVideoFile: string | null
+  heroPhotoUrl: string | null
+  heroPhotoFile: string | null
 }

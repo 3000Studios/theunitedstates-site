@@ -5,7 +5,7 @@ import { TiltCard } from '@/components/cards/TiltCard'
 export function ArticleCard({ article }: { article: Article }) {
   return (
     <TiltCard className="h-full">
-      <Link to={`/article/${article.slug}`} className="block">
+      <Link to={`/story/${article.slug}`} className="block">
         <div className="grid gap-0 md:grid-cols-[220px_1fr]">
           <div className="relative aspect-[16/10] w-full overflow-hidden md:aspect-auto md:min-h-[200px]">
             <img

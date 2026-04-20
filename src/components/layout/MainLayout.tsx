@@ -1,7 +1,6 @@
 import { useEffect, type ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Header } from '@/components/layout/Header'
-import { EmpireCrossStrip } from '@/components/empire/EmpireCrossStrip'
 import { Footer } from '@/components/layout/Footer'
 import { NewsTicker } from '@/components/layout/NewsTicker'
 import { TrendingTicker } from '@/components/layout/TrendingTicker'
@@ -29,7 +28,6 @@ export function MainLayout({ children }: { children: ReactNode }) {
       <NewsTicker />
       <TrendingTicker />
       <Header />
-      <EmpireCrossStrip />
       <main className="mx-auto w-full max-w-[1600px] px-4 pb-28 pt-8 md:pb-12">{children}</main>
       <Footer />
       <NewsletterModal />

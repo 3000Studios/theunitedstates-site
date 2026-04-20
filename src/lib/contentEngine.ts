@@ -1,12 +1,9 @@
-import type { Article, ArticleCategory } from '@/lib/types'
-import { articleTemplates } from '@/data/articleTemplates'
+import type { Article } from '@/lib/types'
 
-const STORAGE_KEY = 'tus_generated_articles_v1'
-const HOUR_MS = 60 * 60 * 1000
-/** Faster tick in development so you can verify the generator without waiting an hour */
-const TICK_MS = import.meta.env.DEV ? 2 * 60 * 1000 : HOUR_MS
+const STORAGE_KEY = 'tus_remote_stories_v1'
+const REFRESH_MS = import.meta.env.DEV ? 2 * 60 * 1000 : 30 * 60 * 1000
 
-function loadExtra(): Article[] {
+function loadRemote(): Article[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
@@ -17,63 +14,58 @@ function loadExtra(): Article[] {
   }
 }
 
-function saveExtra(articles: Article[]): void {
+function saveRemote(articles: Article[]): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(articles))
+}
+
+async function fetchRemoteStories(): Promise<Article[]> {
+  const res = await fetch('/api/stories', { headers: { accept: 'application/json' } })
+  if (!res.ok) return []
+  const data = (await res.json()) as { stories?: Article[] }
+  const stories = data?.stories
+  return Array.isArray(stories) ? stories : []
+}
+
+function merge(seed: Article[], remote: Article[]): Article[] {
+  const seen = new Set(seed.map((a) => a.id))
+  const merged = [...seed]
+  for (const r of remote) {
+    if (!r?.id || seen.has(r.id)) continue
+    seen.add(r.id)
+    merged.push(r)
+  }
+  return merged
 }
 
 let timer: ReturnType<typeof setInterval> | null = null
 
-/**
- * Simulates hourly publishing by appending templated articles.
- * Swap `generateFromTemplate` for an AI pipeline later without changing UI.
- */
 export function startContentEngine(onUpdate: (all: Article[]) => void, seed: Article[]): () => void {
-  const tick = () => {
-    const extra = loadExtra()
-    const next = generateFromTemplate(seed.length + extra.length)
-    const merged = [...extra, next]
-    saveExtra(merged)
-    onUpdate([...seed, ...merged])
+  let cancelled = false
+
+  const refresh = async () => {
+    try {
+      const remote = await fetchRemoteStories()
+      if (cancelled) return
+      if (remote.length) saveRemote(remote)
+      const all = merge(seed, remote.length ? remote : loadRemote())
+      onUpdate(all)
+    } catch {
+      const all = merge(seed, loadRemote())
+      onUpdate(all)
+    }
   }
 
-  timer = setInterval(tick, TICK_MS)
+  refresh()
+  timer = setInterval(refresh, REFRESH_MS)
+
   return () => {
+    cancelled = true
     if (timer) clearInterval(timer)
     timer = null
   }
 }
 
 export function getAllArticles(seed: Article[]): Article[] {
-  return [...seed, ...loadExtra()]
+  return merge(seed, loadRemote())
 }
 
-function pick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)]!
-}
-
-function generateFromTemplate(index: number): Article {
-  const t = pick(articleTemplates)
-  const slug = `${t.slugPrefix}-${index}-${Date.now().toString(36)}`
-  const now = new Date().toISOString()
-  const category = t.category as ArticleCategory
-  const body = t.bodyParagraphs.map((p) =>
-    p.replace(/\{\{year\}\}/g, String(new Date().getFullYear())),
-  )
-  return {
-    id: `gen-${index}-${crypto.randomUUID()}`,
-    slug,
-    title: `${t.titlePrefix}: ${t.rotatingHeadlines[index % t.rotatingHeadlines.length]}`,
-    excerpt: t.excerpt,
-    paragraphs: body,
-    category,
-    author: 'Editorial Desk',
-    publishedAt: now,
-    updatedAt: now,
-    readTimeMinutes: Math.max(4, Math.round(body.join(' ').split(/\s+/).length / 220)),
-    image: t.image,
-    imageCredit: t.imageCredit,
-    tags: t.tags,
-    seoTitle: `${t.titlePrefix} | The United States Site`,
-    seoDescription: t.excerpt,
-  }
-}

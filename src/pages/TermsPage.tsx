@@ -4,15 +4,15 @@ export function TermsPage() {
   return (
     <>
       <Seo
-        title="Terms of Use | The United States Site"
-        description="Terms of use for visiting and using The United States Site."
+        title="Terms of Use | The United States"
+        description="Terms of use for visiting and using The United States."
         path="/terms"
       />
       <header className="mb-8">
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-extrabold text-white md:text-5xl">
           Terms of Use
         </h1>
-        <p className="mt-3 text-slate-400">Last updated: April 16, 2026</p>
+        <p className="mt-3 text-slate-400">Last updated: April 20, 2026</p>
       </header>
       <div className="space-y-6 text-sm leading-relaxed text-slate-200/90">
         <section className="glass-panel rounded-3xl p-6">

@@ -6,6 +6,7 @@ const KEY = 'tus_newsletter_seen_v1'
 
 export function NewsletterModal() {
   const [open, setOpen] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
 
   useEffect(() => {
     if (sessionStorage.getItem(KEY)) return
@@ -20,8 +21,27 @@ export function NewsletterModal() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    trackEvent('newsletter_submit', { source: 'modal' })
-    close()
+    const form = e.currentTarget as HTMLFormElement
+    const formData = new FormData(form)
+    const email = String(formData.get('email') ?? '').trim()
+    const consent = String(formData.get('consent') ?? '') === 'on'
+    if (!email || !consent) return
+    setStatus('sending')
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, consent, source: 'modal' }),
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error('bad status')
+        trackEvent('newsletter_submit', { source: 'modal' })
+        setStatus('ok')
+        window.setTimeout(close, 700)
+      })
+      .catch(() => {
+        setStatus('error')
+        window.setTimeout(() => setStatus('idle'), 3500)
+      })
   }
 
   return (
@@ -69,19 +89,29 @@ export function NewsletterModal() {
                 <input
                   required
                   type="email"
+                  name="email"
                   placeholder="you@email.com"
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-sky-500/60"
                 />
               </label>
+              <label className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-[11px] text-slate-200/90">
+                <input name="consent" type="checkbox" required className="mt-0.5 h-4 w-4 accent-sky-500" />
+                <span>
+                  I agree to receive emails. Not for children under 13. See{' '}
+                  <a className="text-sky-200 hover:text-white" href="/privacy">
+                    Privacy
+                  </a>
+                  .
+                </span>
+              </label>
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/30"
+                className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/30 disabled:opacity-70"
+                disabled={status === 'sending'}
               >
-                Join the list
+                {status === 'sending' ? 'Joining…' : status === 'ok' ? 'Joined' : 'Join the list'}
               </button>
-              <p className="text-[11px] text-slate-500">
-                This demo captures intent in the UI layer only—wire your ESP or API when ready.
-              </p>
+              {status === 'error' && <p className="text-[11px] text-rose-200/90">Couldn’t submit right now. Please try again.</p>}
             </form>
           </motion.div>
         </motion.div>

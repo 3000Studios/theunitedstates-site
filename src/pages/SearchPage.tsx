@@ -15,8 +15,8 @@ export function SearchPage() {
   return (
     <>
       <Seo
-        title={q ? `Search: ${q} | The United States Site` : 'Search | The United States Site'}
-        description="Search articles across news, money, tech, guides, lifestyle, and state explainers."
+        title={q ? `Search: ${q} | The United States` : 'Search | The United States'}
+        description="Search across updates, travel guides, history, and state pages."
         path="/search"
       />
       <header className="mb-8">
@@ -41,8 +41,8 @@ export function SearchPage() {
         {q && results.length === 0 && (
           <div className="glass-panel rounded-3xl p-8 text-center text-slate-300/90">
             No matches. Try a shorter keyword or browse{' '}
-            <Link className="text-sky-200 hover:text-white" to="/blog">
-              the blog
+            <Link className="text-sky-200 hover:text-white" to="/updates">
+              updates
             </Link>
             .
           </div>

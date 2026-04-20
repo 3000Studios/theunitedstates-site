@@ -14,7 +14,7 @@ export function NewsTicker() {
     <div className="relative z-50 border-b border-white/10 bg-[#0a1f44]/90 backdrop-blur">
       <div className="mx-auto flex max-w-[1600px] items-center gap-3 px-4 py-2 text-xs sm:text-sm">
         <span className="shrink-0 rounded-full bg-[#b22234] px-2 py-0.5 font-semibold uppercase tracking-wide text-white">
-          Live
+          Updates
         </span>
         <div className="overflow-hidden">
           <motion.div

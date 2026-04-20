@@ -1,0 +1,21 @@
+name = "theunitedstates-site-worker"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# Attach this Worker only for API paths so Cloudflare Pages continues to serve the site.
+routes = [
+  { pattern = "theunitedstates.site/api/*", zone_name = "theunitedstates.site" }
+]
+
+[triggers]
+crons = ["0 * * * *"]
+
+[durable_objects]
+bindings = [
+  { name = "CONTENT", class_name = "ContentStore" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["ContentStore"]
+

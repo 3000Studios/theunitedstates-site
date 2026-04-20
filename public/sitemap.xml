@@ -1,18 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://theunitedstates.site/</loc><changefreq>hourly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://theunitedstates.site/news</loc><changefreq>hourly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://theunitedstates.site/trending</loc><changefreq>hourly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://theunitedstates.site/states</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://theunitedstates.site/money</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://theunitedstates.site/tech</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://theunitedstates.site/states</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://theunitedstates.site/updates</loc><changefreq>hourly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://theunitedstates.site/kids</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://theunitedstates.site/constitution</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://theunitedstates.site/guides</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://theunitedstates.site/blog</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
-  <url><loc>https://theunitedstates.site/store</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://theunitedstates.site/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://theunitedstates.site/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://theunitedstates.site/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://theunitedstates.site/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://theunitedstates.site/disclaimer</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://theunitedstates.site/search</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://theunitedstates.site/states/al</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ak</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/az</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ar</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ca</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/co</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ct</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/de</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/dc</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/fl</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ga</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/hi</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/id</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/il</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/in</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ia</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ks</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ky</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/la</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/me</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/md</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ma</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/mi</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/mn</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ms</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/mo</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/mt</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ne</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/nv</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/nh</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/nj</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/nm</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ny</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/nc</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/nd</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/oh</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ok</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/or</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/pa</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ri</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/sc</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/sd</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/tn</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/tx</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/ut</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/vt</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/va</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/wa</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/wv</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/wi</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://theunitedstates.site/states/wy</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
 </urlset>

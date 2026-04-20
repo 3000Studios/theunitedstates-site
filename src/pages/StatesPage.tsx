@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Seo } from '@/components/seo/Seo'
 import { US_STATES } from '@/data/usStates'
 import { AdSlot } from '@/components/ads/AdSlot'
+
+const FALLBACK_IMAGE = 'https://commons.wikimedia.org/wiki/Special:FilePath/Flag%20of%20the%20United%20States.svg'
 
 export function StatesPage() {
   const [q, setQ] = useState('')
@@ -19,16 +22,16 @@ export function StatesPage() {
   return (
     <>
       <Seo
-        title="USA States Hub | The United States Site"
-        description="Explore all 50 states with quick facts and relocation-oriented highlights—then dig deeper with our guides."
+        title="Explore the 50 States + Washington, D.C. | The United States"
+        description="Browse all 50 states (plus Washington, D.C.) with fast facts, maps, photos, and travel-friendly links."
         path="/states"
       />
       <header className="mb-8">
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-extrabold text-white md:text-5xl">
-          States
+          States + D.C.
         </h1>
         <p className="mt-3 max-w-3xl text-base text-slate-300/90">
-          A fast grid for all 50 states. Use search to jump to a name, abbreviation, or capital city.
+          Browse every state (plus Washington, D.C.). Use search to jump to a name, abbreviation, or capital city.
         </p>
       </header>
       <AdSlot slotKey="topBanner" className="mx-auto mb-8 max-w-[970px]" />
@@ -38,16 +41,21 @@ export function StatesPage() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Try “TX”, “Texas”, or “Austin”"
+            placeholder="Try “NY”, “New York”, or “Albany”"
             className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-sky-500/60"
           />
         </label>
       </div>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((st) => (
-          <article key={st.id} className="glass-panel overflow-hidden rounded-3xl">
+          <article key={st.id} className="glass-panel group overflow-hidden rounded-3xl">
             <div className="aspect-[16/9] overflow-hidden">
-              <img src={st.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+              <img
+                src={st.heroPhotoUrl ?? st.flagUrl ?? FALLBACK_IMAGE}
+                alt={`${st.name} hero`}
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              />
             </div>
             <div className="p-5">
               <div className="flex items-center justify-between gap-3">
@@ -56,17 +64,24 @@ export function StatesPage() {
                     {st.abbreviation}
                   </div>
                   <h2 className="mt-1 font-[family-name:var(--font-display)] text-xl font-extrabold text-white">
-                    {st.name}
+                    <Link to={`/states/${st.slug}`} className="hover:text-sky-200">
+                      {st.name}
+                    </Link>
                   </h2>
                 </div>
-                <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-slate-200/90">
-                  Pop. {st.population}
-                </div>
+                <Link
+                  to={`/states/${st.slug}`}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-slate-200/90 transition hover:border-sky-400/40 hover:text-white"
+                >
+                  Explore
+                </Link>
               </div>
               <p className="mt-2 text-sm text-slate-300/90">
                 Capital: <span className="font-semibold text-white">{st.capital}</span>
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300/90">{st.highlight}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300/90">
+                Photos and videos are pulled from Wikimedia Commons when available.
+              </p>
             </div>
           </article>
         ))}

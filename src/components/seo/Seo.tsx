@@ -20,7 +20,7 @@ export function Seo({ title, description, path, image, jsonLd }: Props) {
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="The United States Site" />
+      <meta property="og:site_name" content="The United States" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
