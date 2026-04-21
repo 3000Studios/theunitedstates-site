@@ -5,6 +5,8 @@ import { Footer } from '@/components/layout/Footer'
 import { NewsTicker } from '@/components/layout/NewsTicker'
 import { TrendingTicker } from '@/components/layout/TrendingTicker'
 import { CustomCursor } from '@/components/effects/CustomCursor'
+import { SoundEffects } from '@/components/effects/SoundEffects'
+import { EagleFlyby } from '@/components/effects/EagleFlyby'
 import { NewsletterModal } from '@/components/layout/NewsletterModal'
 import { MobileStickyAd } from '@/components/ads/MobileStickyAd'
 import { initAnalytics, attachScrollDepthTracking, trackPageView } from '@/lib/analytics'
@@ -23,8 +25,10 @@ export function MainLayout({ children }: { children: ReactNode }) {
   }, [pathname])
 
   return (
-    <div className="min-h-dvh bg-[#050d1a] text-slate-100">
+    <div className="min-h-dvh bg-[#050d1a] text-slate-100 site-surface">
       <CustomCursor />
+      <SoundEffects />
+      <EagleFlyby />
       <NewsTicker />
       <TrendingTicker />
       <Header />

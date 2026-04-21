@@ -27,6 +27,18 @@ type Story = {
   seoDescription: string
 }
 
+type GameKind = 'capital_sprint' | 'flag_memory' | 'eagle_run'
+
+type Game = {
+  id: string
+  kind: GameKind
+  title: string
+  description: string
+  seed: number
+  createdAt: string
+  updatedAt: string
+}
+
 const FEEDS: Array<{ name: string; url: string; category: StoryCategory }> = [
   {
     name: 'NASA',
@@ -268,6 +280,26 @@ export class ContentStore implements DurableObject {
         created_at TEXT NOT NULL
       );
     `)
+    sql.exec(`
+      CREATE TABLE IF NOT EXISTS games (
+        id TEXT PRIMARY KEY,
+        kind TEXT NOT NULL,
+        title TEXT NOT NULL,
+        json TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+    `)
+    sql.exec(`
+      CREATE INDEX IF NOT EXISTS idx_games_created_at ON games(created_at DESC);
+    `)
+    sql.exec(`
+      CREATE TABLE IF NOT EXISTS crypto_cache (
+        id TEXT PRIMARY KEY,
+        json TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+    `)
   }
 
   async fetch(request: Request): Promise<Response> {
@@ -275,6 +307,15 @@ export class ContentStore implements DurableObject {
 
     if (request.method === 'GET' && url.pathname === '/stories') {
       return this.handleStories()
+    }
+    if (request.method === 'GET' && url.pathname === '/games') {
+      return this.handleGames()
+    }
+    if (request.method === 'GET' && url.pathname.startsWith('/games/')) {
+      return this.handleGame(url.pathname.split('/').pop() ?? '')
+    }
+    if (request.method === 'GET' && url.pathname === '/crypto') {
+      return this.handleCrypto()
     }
     if (request.method === 'POST' && url.pathname === '/lead') {
       return this.handleLead(request)
@@ -299,6 +340,49 @@ export class ContentStore implements DurableObject {
         'cache-control': 'public, max-age=300',
       },
     })
+  }
+
+  private async handleGames(): Promise<Response> {
+    try {
+      this.upsertHourlyGame(new Date().toISOString())
+    } catch {
+      // ignore
+    }
+    const sql = this.state.storage.sql
+    const rows = sql
+      .exec(`SELECT json FROM games ORDER BY created_at DESC LIMIT 80;`)
+      .toArray() as Array<{ json: string }>
+    const games = rows.map((r) => JSON.parse(r.json)) as Game[]
+    return new Response(JSON.stringify({ games }), {
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+        'cache-control': 'public, max-age=300',
+      },
+    })
+  }
+
+  private async handleGame(id: string): Promise<Response> {
+    const safeId = String(id ?? '').trim()
+    if (!safeId) return new Response('Not found', { status: 404 })
+    const sql = this.state.storage.sql
+    const rows = sql.exec(`SELECT json FROM games WHERE id = ?1 LIMIT 1;`, safeId).toArray() as Array<{ json: string }>
+    if (!rows[0]) return new Response('Not found', { status: 404 })
+    const game = JSON.parse(rows[0].json) as Game
+    return new Response(JSON.stringify({ game }), {
+      headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'public, max-age=300' },
+    })
+  }
+
+  private async handleCrypto(): Promise<Response> {
+    const sql = this.state.storage.sql
+    const row = sql.exec(`SELECT json, updated_at FROM crypto_cache WHERE id = 'top_movers' LIMIT 1;`).toArray() as Array<{ json: string; updated_at: string }>
+    if (row[0]) {
+      return new Response(row[0].json, {
+        headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'public, max-age=300' },
+      })
+    }
+    const empty = JSON.stringify({ movers: [], updatedAt: new Date().toISOString() })
+    return new Response(empty, { headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'public, max-age=60' } })
   }
 
   private async handleLead(request: Request): Promise<Response> {
@@ -383,8 +467,95 @@ export class ContentStore implements DurableObject {
       }
     }
 
+    // Ensure at least one game exists, then add one per hour (id is hour bucket).
+    try {
+      this.upsertHourlyGame(now)
+    } catch {
+      // ignore
+    }
+
+    // Refresh crypto movers (best-effort).
+    try {
+      const crypto = await fetchTopCryptoMovers()
+      sql.exec(
+        `INSERT OR REPLACE INTO crypto_cache(id, json, updated_at) VALUES ('top_movers', ?1, ?2);`,
+        JSON.stringify({ movers: crypto, updatedAt: now }),
+        now,
+      )
+    } catch {
+      // ignore
+    }
+
     return new Response(JSON.stringify({ ok: true, refreshedAt: now, results }), {
       headers: { 'content-type': 'application/json; charset=utf-8' },
     })
   }
+
+  private upsertHourlyGame(nowIso: string) {
+    const sql = this.state.storage.sql
+    const hourId = nowIso.slice(0, 13).replace(/[:T-]/g, '')
+    const id = `hour-${hourId}`
+
+    const existing = sql.exec(`SELECT id FROM games WHERE id = ?1 LIMIT 1;`, id).toArray() as Array<{ id: string }>
+    if (existing[0]) return
+
+    const seed = Number.parseInt(hourId.slice(-4), 10) || 0
+    const kinds: GameKind[] = ['capital_sprint', 'flag_memory', 'eagle_run']
+    const kind = kinds[seed % kinds.length]!
+    const title = `USA Kid Challenge — ${nowIso.slice(0, 10)} ${nowIso.slice(11, 13)}:00`
+    const description =
+      kind === 'capital_sprint'
+        ? 'Tap the right capital as fast as you can.'
+        : kind === 'flag_memory'
+          ? 'Flip cards and match state flags.'
+          : 'Tap to fly. Dodge the stars. Collect points.'
+
+    const game: Game = {
+      id,
+      kind,
+      title,
+      description,
+      seed,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+    }
+
+    sql.exec(
+      `INSERT OR REPLACE INTO games(id, kind, title, json, created_at, updated_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6);`,
+      game.id,
+      game.kind,
+      game.title,
+      JSON.stringify(game),
+      game.createdAt,
+      game.updatedAt,
+    )
+  }
+}
+
+async function fetchTopCryptoMovers(): Promise<Array<{ symbol: string; name: string; change24h: number; priceUsd: number }>> {
+  // CoinGecko public endpoint (no key). Worker-side avoids browser CORS.
+  const url = new URL('https://api.coingecko.com/api/v3/coins/markets')
+  url.searchParams.set('vs_currency', 'usd')
+  url.searchParams.set('order', 'market_cap_desc')
+  url.searchParams.set('per_page', '250')
+  url.searchParams.set('page', '1')
+  url.searchParams.set('price_change_percentage', '24h')
+
+  const res = await fetch(url.toString(), { headers: { accept: 'application/json' } })
+  if (!res.ok) return []
+  const data = (await res.json()) as unknown
+  const arr = Array.isArray(data) ? (data as Array<Record<string, unknown>>) : []
+  const movers = arr
+    .map((c) => {
+      const symbol = String(c.symbol ?? '').toUpperCase()
+      const name = String(c.name ?? '')
+      const change24h = Number(c.price_change_percentage_24h ?? c.price_change_percentage_24h_in_currency ?? NaN)
+      const priceUsd = Number(c.current_price ?? NaN)
+      return { symbol, name, change24h, priceUsd }
+    })
+    .filter((m) => m.symbol && m.name && Number.isFinite(m.change24h) && Number.isFinite(m.priceUsd))
+    .sort((a, b) => b.change24h - a.change24h)
+    .slice(0, 18)
+
+  return movers
 }

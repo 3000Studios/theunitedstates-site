@@ -5,6 +5,7 @@ import { NAV_ITEMS } from '@/data/navigation'
 import { AdSlot } from '@/components/ads/AdSlot'
 import { WireframeMark } from '@/components/brand/WireframeMark'
 import { FlagHamburger } from '@/components/brand/FlagHamburger'
+import { PAYPAL_DONATE_URL } from '@/config/donate'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -87,6 +88,25 @@ export function Header() {
             ))}
           </nav>
 
+          <a
+            href={PAYPAL_DONATE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden rounded-full border border-white/10 bg-gradient-to-r from-[#b22234] via-amber-500/70 to-sky-600 px-3 py-2 text-sm font-extrabold text-white shadow-lg shadow-black/30 hover:border-white/20 lg:inline-flex"
+          >
+            Donate today · Keep America great
+          </a>
+
+          <a
+            href={PAYPAL_DONATE_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Donate today"
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-3 text-xs font-extrabold text-white lg:hidden"
+          >
+            Donate
+          </a>
+
           <button
             type="button"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -109,6 +129,17 @@ export function Header() {
             className="border-t border-white/10 bg-[#050d1a]/95 lg:hidden"
           >
             <div className="mx-auto max-w-[1600px] space-y-3 px-4 py-4">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-xs font-bold uppercase tracking-[0.25em] text-sky-200/80">theunitedstates.site</div>
+                <a
+                  href={PAYPAL_DONATE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-extrabold text-white hover:bg-white/10"
+                >
+                  Donate today
+                </a>
+              </div>
               <form onSubmit={submitSearch}>
                 <input
                   value={q}

@@ -1,140 +1,107 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Seo } from '@/components/seo/Seo'
 import { AdSlot } from '@/components/ads/AdSlot'
-import { US_STATES } from '@/data/usStates'
+import { fetchGames, type ApiGame } from '@/lib/api'
 
-type Question = {
-  state: string
-  capital: string
-  options: string[]
-}
-
-function pick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)]!
-}
-
-function buildQuestion(): Question {
-  const correct = pick(US_STATES)
-  const wrong = new Set<string>()
-  while (wrong.size < 3) {
-    const c = pick(US_STATES).capital
-    if (c !== correct.capital) wrong.add(c)
-  }
-  const options = [correct.capital, ...wrong]
-  options.sort(() => Math.random() - 0.5)
-  return { state: correct.name, capital: correct.capital, options }
-}
+const HERO_VIDEO =
+  'https://commons.wikimedia.org/wiki/Special:FilePath/Grand%20Canyon%20National%20Park-%20Timelapse%20Video%20-%20Summer%20Clouds%20%287775362134%29.webm'
 
 export function KidsPage() {
-  const [score, setScore] = useState(0)
-  const [tries, setTries] = useState(0)
-  const [q, setQ] = useState<Question>(() => buildQuestion())
-  const [result, setResult] = useState<'correct' | 'wrong' | null>(null)
+  const [games, setGames] = useState<ApiGame[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const accuracy = useMemo(() => (tries ? Math.round((score / tries) * 100) : 0), [score, tries])
-
-  const answer = (choice: string) => {
-    setTries((t) => t + 1)
-    if (choice === q.capital) {
-      setScore((s) => s + 1)
-      setResult('correct')
-    } else {
-      setResult('wrong')
+  useEffect(() => {
+    let cancelled = false
+    fetchGames()
+      .then((g) => {
+        if (!cancelled) setGames(g)
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
     }
-    window.setTimeout(() => {
-      setQ(buildQuestion())
-      setResult(null)
-    }, 900)
-  }
+  }, [])
+
+  const latest = useMemo(() => games.slice(0, 24), [games])
 
   return (
     <>
-      <Seo
-        title="Kid Zone | The United States"
-        description="Family-friendly USA learning: quick trivia and state capital practice."
-        path="/kids"
-      />
+      <Seo title="Kid Zone | The United States" description="Family-friendly USA games and learning." path="/kids" />
 
       <header className="mb-8">
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-extrabold text-white md:text-5xl">
           Kid Zone
         </h1>
         <p className="mt-3 max-w-3xl text-base text-slate-300/90">
-          Quick, family-friendly trivia. No accounts. No chat. Just learn the states.
+          Pick a game and play. New games are added automatically every hour.
         </p>
       </header>
 
-      <AdSlot slotKey="topBanner" className="mx-auto mb-8 max-w-[970px]" />
-
-      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        <section className="glass-panel rounded-3xl p-6">
-          <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Capital quiz</div>
-          <h2 className="mt-4 font-[family-name:var(--font-display)] text-2xl font-extrabold text-white">
-            What is the capital of <span className="gradient-text glow-text">{q.state}</span>?
-          </h2>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {q.options.map((opt) => (
-              <button
-                key={opt}
-                type="button"
-                onClick={() => answer(opt)}
-                className="kid-choice rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left text-sm font-semibold text-white transition hover:border-sky-400/30 hover:bg-white/5"
-              >
-                {opt}
-              </button>
-            ))}
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/40">
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-75"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          src={HERO_VIDEO}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.35),transparent_55%),radial-gradient(circle_at_70%_30%,rgba(178,34,52,0.28),transparent_55%),linear-gradient(180deg,rgba(2,6,23,0.15),rgba(2,6,23,0.9))]" />
+        <div className="relative z-10 px-5 py-10 md:px-10">
+          <div className="glass-panel inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-sky-200/80">
+            USA · Games · Family-friendly
           </div>
-          <div className="mt-6 text-sm text-slate-300/90">
-            {result === 'correct' && <span className="font-bold text-emerald-300">Correct!</span>}
-            {result === 'wrong' && (
-              <span className="font-bold text-rose-300">
-                Not quite — the capital is <span className="text-white">{q.capital}</span>.
-              </span>
-            )}
+          <div className="mt-5 font-[family-name:var(--font-display)] text-2xl font-extrabold text-white md:text-3xl">
+            Choose a game
           </div>
-        </section>
+          <p className="mt-2 max-w-2xl text-sm text-slate-200/90">
+            Built to be mobile-friendly. No accounts needed.
+          </p>
+        </div>
+      </section>
 
-        <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-          <div className="glass-panel rounded-3xl p-5">
-            <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Score</div>
-            <div className="mt-4 grid grid-cols-3 gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Correct</div>
-                <div className="mt-1 text-2xl font-extrabold text-white">{score}</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Tries</div>
-                <div className="mt-1 text-2xl font-extrabold text-white">{tries}</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Accuracy</div>
-                <div className="mt-1 text-2xl font-extrabold text-white">{accuracy}%</div>
-              </div>
+      <AdSlot slotKey="topBanner" className="mx-auto mt-8 max-w-[970px]" />
+
+      <section className="mt-10">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="font-[family-name:var(--font-display)] text-2xl font-extrabold text-white">Games</h2>
+          <div className="text-xs font-semibold text-slate-400">
+            {loading ? 'Loading…' : `${games.length} available`}
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {latest.map((g) => (
+            <Link key={g.id} to={`/kids/games/${encodeURIComponent(g.id)}`} className="glass-panel rounded-3xl p-6 hover:border-sky-400/30">
+              <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">{g.kind.replace('_', ' ')}</div>
+              <div className="mt-3 font-[family-name:var(--font-display)] text-xl font-extrabold text-white">{g.title}</div>
+              <p className="mt-2 text-sm leading-relaxed text-slate-300/90">{g.description}</p>
+              <div className="mt-4 text-xs font-semibold text-sky-200">Play →</div>
+            </Link>
+          ))}
+          {loading && Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="glass-panel rounded-3xl p-6">
+              <div className="h-3 w-24 animate-pulse rounded bg-white/10" />
+              <div className="mt-4 h-5 w-3/4 animate-pulse rounded bg-white/10" />
+              <div className="mt-3 h-4 w-full animate-pulse rounded bg-white/10" />
+              <div className="mt-2 h-4 w-5/6 animate-pulse rounded bg-white/10" />
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                setScore(0)
-                setTries(0)
-              }}
-              className="mt-4 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              Reset
-            </button>
-          </div>
+          ))}
+          {!loading && games.length === 0 && (
+            <div className="glass-panel rounded-3xl p-8 text-sm text-slate-300/90">
+              No games yet. Check back soon.
+            </div>
+          )}
+        </div>
 
-          <AdSlot slotKey="sidebar" className="hidden lg:block" />
-
-          <div className="glass-panel rounded-3xl p-5">
-            <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Parent note</div>
-            <p className="mt-3 text-xs leading-relaxed text-slate-400">
-              This page does not collect personal information from kids. Newsletter signups and contact forms are
-              intended for adults only.
-            </p>
-          </div>
-        </aside>
-      </div>
+        <div className="mt-10">
+          <AdSlot slotKey="inContent" className="mx-auto max-w-[728px]" />
+        </div>
+      </section>
     </>
   )
 }
-

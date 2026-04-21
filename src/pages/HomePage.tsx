@@ -14,10 +14,26 @@ const HeroGlobe = lazy(async () => {
 })
 
 const USA_HERO_VIDEOS = [
-  'File:DSCOVR EPIC Earth Rotation.webm',
-  'File:Aerial views of Oregon, United States in summer.webm',
-  'File:Grand Canyon National Park- Timelapse Video - Summer Clouds (7775362134).webm',
-  'File:Raising the Flag on Iwo Jima (color).ogv',
+  {
+    file: 'File:DSCOVR EPIC Earth Rotation.webm',
+    title: 'America from orbit',
+  },
+  {
+    file: 'File:Grand Canyon National Park- Timelapse Video - Summer Clouds (7775362134).webm',
+    title: 'Grand Canyon skies',
+  },
+  {
+    file: 'File:U.S.A Flag Flapping.webmhd.webm',
+    title: 'Stars and stripes in motion',
+  },
+  {
+    file: 'File:Bald Eagles (18731656064).webm',
+    title: 'Bald eagles in flight',
+  },
+  {
+    file: 'File:Raising The American Flag.webm',
+    title: 'American flag on the moon',
+  },
 ] as const
 
 function filePath(fileTitle: string): string {
@@ -45,11 +61,7 @@ export function HomePage() {
 
   const [heroIdx, setHeroIdx] = useState(0)
   const heroRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    const t = window.setInterval(() => setHeroIdx((i) => (i + 1) % USA_HERO_VIDEOS.length), 7000)
-    return () => window.clearInterval(t)
-  }, [])
+  const heroVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
 
   useEffect(() => {
     const root = heroRef.current
@@ -59,6 +71,25 @@ export function HomePage() {
     }, root)
     return () => ctx.revert()
   }, [])
+
+  useEffect(() => {
+    heroVideoRefs.current.forEach((video, index) => {
+      if (!video) return
+      if (index !== heroIdx) {
+        video.pause()
+        if (video.currentTime > 0) video.currentTime = 0
+      }
+    })
+
+    const activeVideo = heroVideoRefs.current[heroIdx]
+    if (!activeVideo) return
+
+    activeVideo.currentTime = 0
+    const playPromise = activeVideo.play()
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {})
+    }
+  }, [heroIdx])
 
   return (
     <>
@@ -76,18 +107,21 @@ export function HomePage() {
 
       <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#050d1a]">
         <div className="absolute inset-0">
-          {USA_HERO_VIDEOS.map((f, i) => (
+          {USA_HERO_VIDEOS.map((video, i) => (
             <video
-              key={f}
+              key={video.file}
+              ref={(node) => {
+                heroVideoRefs.current[i] = node
+              }}
               className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
                 i === heroIdx ? 'opacity-70' : 'opacity-0'
               }`}
-              autoPlay
+              autoPlay={i === heroIdx}
               muted
-              loop
               playsInline
               preload="metadata"
-              src={filePath(f)}
+              onEnded={() => setHeroIdx((current) => (current + 1) % USA_HERO_VIDEOS.length)}
+              src={filePath(video.file)}
             />
           ))}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.35),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(178,34,52,0.35),transparent_55%),linear-gradient(135deg,rgba(5,13,26,0.85),rgba(10,31,68,0.55),rgba(2,6,23,0.9))]" />
@@ -114,6 +148,9 @@ export function HomePage() {
             Family-friendly destinations, history you can trust, and uplifting updates—designed to be fast, readable, and
             ad-ready.
           </p>
+          <div className="hero-reveal mt-4 inline-flex rounded-full border border-white/15 bg-black/25 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/85">
+            Now playing: {USA_HERO_VIDEOS[heroIdx].title}
+          </div>
           <div className="hero-reveal mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/states"
@@ -292,4 +329,3 @@ export function HomePage() {
     </>
   )
 }
-

@@ -10,6 +10,7 @@ const StatesPage = lazy(async () => ({ default: (await import('@/pages/StatesPag
 const StatePage = lazy(async () => ({ default: (await import('@/pages/StatePage')).StatePage }))
 const UpdatesPage = lazy(async () => ({ default: (await import('@/pages/UpdatesPage')).UpdatesPage }))
 const KidsPage = lazy(async () => ({ default: (await import('@/pages/KidsPage')).KidsPage }))
+const GamePage = lazy(async () => ({ default: (await import('@/pages/GamePage')).GamePage }))
 const ConstitutionPage = lazy(async () => ({ default: (await import('@/pages/ConstitutionPage')).ConstitutionPage }))
 const GuidesPage = lazy(async () => ({ default: (await import('@/pages/GuidesPage')).GuidesPage }))
 const AboutPage = lazy(async () => ({ default: (await import('@/pages/AboutPage')).AboutPage }))
@@ -76,6 +77,14 @@ function AnimatedRoutes() {
           element={
             <PageFade>
               <KidsPage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/kids/games/:id"
+          element={
+            <PageFade>
+              <GamePage />
             </PageFade>
           }
         />
