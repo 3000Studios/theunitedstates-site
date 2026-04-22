@@ -226,6 +226,14 @@ async function parseFeed(xml: string): Promise<Array<{ title: string; link: stri
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
+    if (url.pathname === '/ads.txt') {
+      return new Response('google.com, pub-5800977493749262, DIRECT, f08c47fec0942fa0', {
+        headers: {
+          'content-type': 'text/plain; charset=utf-8',
+          'cache-control': 'public, max-age=3600',
+        },
+      })
+    }
     if (!url.pathname.startsWith('/api/')) return new Response('Not found', { status: 404 })
 
     const id = env.CONTENT.idFromName('global')
