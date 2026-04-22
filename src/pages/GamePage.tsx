@@ -6,6 +6,8 @@ import { fetchGame, type ApiGame } from '@/lib/api'
 import { CapitalSprintGame } from '@/components/kids/games/CapitalSprintGame'
 import { FlagMemoryGame } from '@/components/kids/games/FlagMemoryGame'
 import { EagleRunGame } from '@/components/kids/games/EagleRunGame'
+import { StateScrambleGame } from '@/components/kids/games/StateScrambleGame'
+import { LandmarkDashGame } from '@/components/kids/games/LandmarkDashGame'
 
 const HERO_VIDEO =
   'https://commons.wikimedia.org/wiki/Special:FilePath/DSCOVR%20EPIC%20Earth%20Rotation.webm'
@@ -13,6 +15,8 @@ const HERO_VIDEO =
 function renderGame(game: ApiGame) {
   if (game.kind === 'capital_sprint') return <CapitalSprintGame seed={game.seed} />
   if (game.kind === 'flag_memory') return <FlagMemoryGame seed={game.seed} />
+  if (game.kind === 'state_scramble') return <StateScrambleGame seed={game.seed} />
+  if (game.kind === 'landmark_dash') return <LandmarkDashGame seed={game.seed} />
   return <EagleRunGame seed={game.seed} />
 }
 

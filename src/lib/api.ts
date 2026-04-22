@@ -1,4 +1,4 @@
-export type ApiGameKind = 'capital_sprint' | 'flag_memory' | 'eagle_run'
+export type ApiGameKind = 'capital_sprint' | 'flag_memory' | 'eagle_run' | 'state_scramble' | 'landmark_dash'
 
 export type ApiGame = {
   id: string
@@ -33,4 +33,3 @@ export async function fetchCryptoMovers(): Promise<{ movers: CryptoMover[]; upda
   if (!Array.isArray(data?.movers) || typeof data?.updatedAt !== 'string') return null
   return { movers: data.movers, updatedAt: data.updatedAt }
 }
-

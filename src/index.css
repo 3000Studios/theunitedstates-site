@@ -46,6 +46,22 @@
   z-index: 1;
 }
 
+.state-wallpaper-float {
+  animation-name: state-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes state-float {
+  0%,
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(var(--float-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(-50%, calc(-50% - 18px), 0) rotate(calc(var(--float-rotate, 0deg) + 5deg));
+  }
+}
+
 .site-surface::before {
   content: "";
   position: fixed;

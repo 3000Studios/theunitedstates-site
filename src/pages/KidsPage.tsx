@@ -59,7 +59,7 @@ export function KidsPage() {
             Choose a game
           </div>
           <p className="mt-2 max-w-2xl text-sm text-slate-200/90">
-            Built to be mobile-friendly. No accounts needed.
+            Built to be mobile-friendly. No accounts needed. New memory, landmark, and state puzzle games rotate in automatically.
           </p>
         </div>
       </section>

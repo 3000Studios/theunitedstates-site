@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Seo } from '@/components/seo/Seo'
 import { AdSlot } from '@/components/ads/AdSlot'
+import { StateWallpaper } from '@/components/states/StateWallpaper'
 import { findStateBySlug } from '@/data/usStates'
 import { fetchTopCitiesInState, type WikidataCity } from '@/lib/wikidata'
 
@@ -50,7 +51,11 @@ export function StatePage() {
   const heroVideoUrl = state.heroVideoUrl ?? FALLBACK_VIDEO_URL
 
   return (
-    <>
+    <div className="relative isolate">
+      <div className="absolute inset-0 -z-10 overflow-hidden rounded-[2.5rem]">
+        <StateWallpaper state={state} />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.14),rgba(2,6,23,0.3)_20%,rgba(2,6,23,0.72)_68%,rgba(2,6,23,0.94)_100%)]" />
+      </div>
       <Seo
         title={`${state.name} Travel Guide | The United States`}
         description={`Explore ${state.name}: quick facts, photos, and travel-friendly links (capital: ${state.capital}).`}
@@ -67,7 +72,8 @@ export function StatePage() {
         </p>
       </header>
 
-      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/40">
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/30">
+        <StateWallpaper state={state} />
         <video
           className="absolute inset-0 h-full w-full object-cover opacity-80"
           autoPlay
@@ -295,6 +301,6 @@ export function StatePage() {
           </div>
         </aside>
       </div>
-    </>
+    </div>
   )
 }

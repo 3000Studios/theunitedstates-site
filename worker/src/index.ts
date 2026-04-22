@@ -27,7 +27,7 @@ type Story = {
   seoDescription: string
 }
 
-type GameKind = 'capital_sprint' | 'flag_memory' | 'eagle_run'
+type GameKind = 'capital_sprint' | 'flag_memory' | 'eagle_run' | 'state_scramble' | 'landmark_dash'
 
 type Game = {
   id: string
@@ -353,6 +353,7 @@ export class ContentStore implements DurableObject {
   private async handleGames(): Promise<Response> {
     try {
       this.upsertHourlyGame(new Date().toISOString())
+      this.ensureFeaturedGames()
     } catch {
       // ignore
     }
@@ -478,6 +479,7 @@ export class ContentStore implements DurableObject {
     // Ensure at least one game exists, then add one per hour (id is hour bucket).
     try {
       this.upsertHourlyGame(now)
+      this.ensureFeaturedGames()
     } catch {
       // ignore
     }
@@ -508,7 +510,7 @@ export class ContentStore implements DurableObject {
     if (existing[0]) return
 
     const seed = Number.parseInt(hourId.slice(-4), 10) || 0
-    const kinds: GameKind[] = ['capital_sprint', 'flag_memory', 'eagle_run']
+    const kinds: GameKind[] = ['capital_sprint', 'flag_memory', 'eagle_run', 'state_scramble', 'landmark_dash']
     const kind = kinds[seed % kinds.length]!
     const title = `USA Kid Challenge — ${nowIso.slice(0, 10)} ${nowIso.slice(11, 13)}:00`
     const description =
@@ -516,7 +518,11 @@ export class ContentStore implements DurableObject {
         ? 'Tap the right capital as fast as you can.'
         : kind === 'flag_memory'
           ? 'Flip cards and match state flags.'
-          : 'Tap to fly. Dodge the stars. Collect points.'
+          : kind === 'state_scramble'
+            ? 'Pick the correct state abbreviation before time rolls on.'
+            : kind === 'landmark_dash'
+              ? 'Match famous landmarks to the correct state.'
+              : 'Tap to fly. Dodge the stars. Collect points.'
 
     const game: Game = {
       id,
@@ -537,6 +543,42 @@ export class ContentStore implements DurableObject {
       game.createdAt,
       game.updatedAt,
     )
+  }
+
+  private ensureFeaturedGames() {
+    const featured: Game[] = [
+      {
+        id: 'featured-state-scramble',
+        kind: 'state_scramble',
+        title: 'State Scramble Spotlight',
+        description: 'Pick the correct state abbreviation before time rolls on.',
+        seed: 5101,
+        createdAt: '2026-04-22T00:00:00.000Z',
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: 'featured-landmark-dash',
+        kind: 'landmark_dash',
+        title: 'Landmark Dash Spotlight',
+        description: 'Match famous landmarks to the correct state.',
+        seed: 5102,
+        createdAt: '2026-04-22T00:00:00.000Z',
+        updatedAt: new Date().toISOString(),
+      },
+    ]
+
+    const sql = this.state.storage.sql
+    for (const game of featured) {
+      sql.exec(
+        `INSERT OR REPLACE INTO games(id, kind, title, json, created_at, updated_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6);`,
+        game.id,
+        game.kind,
+        game.title,
+        JSON.stringify(game),
+        game.createdAt,
+        game.updatedAt,
+      )
+    }
   }
 }
 
