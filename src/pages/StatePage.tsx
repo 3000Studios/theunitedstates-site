@@ -5,6 +5,7 @@ import { AdSlot } from '@/components/ads/AdSlot'
 import { StateWallpaper } from '@/components/states/StateWallpaper'
 import { findStateBySlug } from '@/data/usStates'
 import { fetchTopCitiesInState, type WikidataCity } from '@/lib/wikidata'
+import { buildStateFaq, buildStateSeoBrief } from '@/lib/seoContent'
 
 const FALLBACK_VIDEO_FILE = 'File:Raising the Flag on Iwo Jima (color).ogv'
 const FALLBACK_VIDEO_URL =
@@ -49,6 +50,9 @@ export function StatePage() {
   }
 
   const heroVideoUrl = state.heroVideoUrl ?? FALLBACK_VIDEO_URL
+  const cityNames = Array.isArray(cities) ? cities.map((city) => city.name) : []
+  const seoBrief = buildStateSeoBrief(state, cityNames)
+  const faq = buildStateFaq(state)
 
   return (
     <div className="relative isolate">
@@ -60,6 +64,18 @@ export function StatePage() {
         title={`${state.name} Travel Guide | The United States`}
         description={`Explore ${state.name}: quick facts, photos, and travel-friendly links (capital: ${state.capital}).`}
         path={`/states/${state.slug}`}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faq.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.answer,
+            },
+          })),
+        }}
       />
 
       <header className="mb-8">
@@ -130,6 +146,15 @@ export function StatePage() {
                 <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Capital</div>
                 <div className="mt-1 text-lg font-extrabold text-white">{state.capital}</div>
               </div>
+            </div>
+          </div>
+
+          <div className="glass-panel rounded-3xl p-6">
+            <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Travel planning brief</div>
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300/90">
+              {seoBrief.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
 
@@ -231,6 +256,18 @@ export function StatePage() {
               >
                 Find official tourism site
               </a>
+            </div>
+          </div>
+
+          <div className="glass-panel rounded-3xl p-6">
+            <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Frequently searched questions</div>
+            <div className="mt-4 space-y-4">
+              {faq.map((item) => (
+                <article key={item.question} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <h2 className="text-base font-extrabold text-white">{item.question}</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-300/90">{item.answer}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>

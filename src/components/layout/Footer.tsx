@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { PAYPAL_DONATE_URL } from '@/config/donate'
 
 export function Footer() {
   return (
@@ -63,6 +64,14 @@ export function Footer() {
             Ads may be served through Google AdSense. When affiliate programs are enabled, we may earn commissions from
             qualifying purchases. Content is for informational purposes and is not legal advice.
           </p>
+          <a
+            href={PAYPAL_DONATE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold text-white hover:bg-white/10"
+          >
+            Fund the site with PayPal
+          </a>
         </div>
       </div>
       <div className="border-t border-white/10 py-6 text-center text-xs text-slate-500">

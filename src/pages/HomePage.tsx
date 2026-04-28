@@ -7,6 +7,7 @@ import { AdSlot } from '@/components/ads/AdSlot'
 import { useArticles } from '@/context/useArticles'
 import { sortByDateDesc } from '@/lib/articles'
 import { US_STATES } from '@/data/usStates'
+import { buildHomeClusters } from '@/lib/seoContent'
 
 const HeroGlobe = lazy(async () => {
   const m = await import('@/components/three/HeroGlobe')
@@ -58,6 +59,7 @@ export function HomePage() {
   const sorted = useMemo(() => sortByDateDesc(stories), [stories])
   const latest = sorted.slice(0, 6)
   const featuredStates = useMemo(() => US_STATES.slice(0, 12), [])
+  const clusters = useMemo(() => buildHomeClusters(), [])
 
   const [heroIdx, setHeroIdx] = useState(0)
   const heroRef = useRef<HTMLDivElement | null>(null)
@@ -213,6 +215,27 @@ export function HomePage() {
 
       <section className="mt-10 grid gap-8 lg:grid-cols-[1fr_360px]">
         <div className="space-y-10">
+          <section className="grid gap-4 lg:grid-cols-3">
+            {clusters.map((cluster) => (
+              <article key={cluster.title} className="glass-panel rounded-3xl p-5">
+                <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">SEO travel hub</div>
+                <h2 className="mt-3 font-[family-name:var(--font-display)] text-xl font-extrabold text-white">{cluster.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300/90">{cluster.summary}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {cluster.links.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-semibold text-slate-100 hover:border-sky-400/30 hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </section>
+
           <section>
             <div className="flex items-end justify-between gap-4">
               <h2 className="font-[family-name:var(--font-display)] text-2xl font-extrabold text-white">

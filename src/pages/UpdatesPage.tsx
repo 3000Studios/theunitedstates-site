@@ -4,10 +4,12 @@ import { Seo } from '@/components/seo/Seo'
 import { AdSlot } from '@/components/ads/AdSlot'
 import { useArticles } from '@/context/useArticles'
 import { sortByDateDesc } from '@/lib/articles'
+import { buildUpdatesCategorySummary } from '@/lib/seoContent'
 
 export function UpdatesPage() {
   const articles = useArticles()
   const list = useMemo(() => sortByDateDesc(articles), [articles])
+  const summary = useMemo(() => buildUpdatesCategorySummary(list), [list])
 
   return (
     <>
@@ -27,6 +29,16 @@ export function UpdatesPage() {
       </header>
 
       <AdSlot slotKey="topBanner" className="mx-auto mb-8 max-w-[970px]" />
+
+      <section className="mb-8 grid gap-4 lg:grid-cols-3">
+        {summary.map((item) => (
+          <article key={item.heading} className="glass-panel rounded-3xl p-5">
+            <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Publishing signal</div>
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-xl font-extrabold text-white">{item.heading}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300/90">{item.copy}</p>
+          </article>
+        ))}
+      </section>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <section className="glass-panel rounded-3xl p-3 sm:p-5">
@@ -68,4 +80,3 @@ export function UpdatesPage() {
     </>
   )
 }
-

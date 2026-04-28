@@ -33,6 +33,9 @@ export function StatesPage() {
         <p className="mt-3 max-w-3xl text-base text-slate-300/90">
           Browse every state (plus Washington, D.C.). Use search to jump to a name, abbreviation, or capital city.
         </p>
+        <p className="mt-3 max-w-4xl text-sm leading-relaxed text-slate-400">
+          This state directory is built for USA travel research, school-friendly history browsing, and long-tail search phrases such as family vacations by state, capital city facts, and official tourism planning links.
+        </p>
       </header>
       <AdSlot slotKey="topBanner" className="mx-auto mb-8 max-w-[970px]" />
       <div className="glass-panel rounded-3xl p-4">
