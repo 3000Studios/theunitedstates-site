@@ -33,3 +33,35 @@ export async function fetchCryptoMovers(): Promise<{ movers: CryptoMover[]; upda
   if (!Array.isArray(data?.movers) || typeof data?.updatedAt !== 'string') return null
   return { movers: data.movers, updatedAt: data.updatedAt }
 }
+
+export async function fetchUser(id: string) {
+  const res = await fetch(`/api/user?id=${encodeURIComponent(id)}`)
+  if (!res.ok) return null
+  return res.json()
+}
+
+export async function updateUser(userData: any) {
+  const res = await fetch('/api/user/update', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(userData)
+  })
+  return res.ok
+}
+
+export async function saveItinerary(itinerary: any) {
+  const res = await fetch('/api/itinerary/save', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(itinerary)
+  })
+  return res.json()
+}
+
+export async function fetchProducts(state?: string) {
+  const url = state ? `/api/products?state=${encodeURIComponent(state)}` : '/api/products'
+  const res = await fetch(url)
+  if (!res.ok) return []
+  const data = await res.json() as { products: any[] }
+  return data.products
+}

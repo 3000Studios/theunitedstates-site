@@ -155,54 +155,54 @@ export function HomePage() {
           </div>
           <div className="hero-reveal mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              to="/states"
+              to="/explore"
               className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/30"
             >
-              Explore states
+              Immersive 3D Explore
             </Link>
             <Link
-              to="/updates"
+              to="/itinerary"
               className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 hover:bg-white/10"
             >
-              Good news updates
+              AI Trip Architect
             </Link>
             <Link
-              to="/kids"
+              to="/passport"
               className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 hover:bg-white/10"
             >
-              Kid Zone
+              Your Passport
             </Link>
           </div>
 
           <div className="hero-reveal mt-10 grid gap-4 md:grid-cols-3">
             <div className="glass-panel rounded-2xl p-4">
-              <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">History</div>
+              <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Interactive</div>
               <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
-                The Constitution (quick reference)
+                3D USA Exploration
               </div>
-              <div className="mt-2 text-xs text-slate-300/90">Bill of Rights highlights + primary sources.</div>
-              <Link to="/constitution" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
+              <div className="mt-2 text-xs text-slate-300/90">Fly through states, discover landmarks and live cameras.</div>
+              <Link to="/explore" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
+                Launch
+              </Link>
+            </div>
+            <div className="glass-panel rounded-2xl p-4">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Planning</div>
+              <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
+                AI Trip Architect
+              </div>
+              <div className="mt-2 text-xs text-slate-300/90">Custom, bookable itineraries built for your family style.</div>
+              <Link to="/itinerary" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
+                Plan now
+              </Link>
+            </div>
+            <div className="glass-panel rounded-2xl p-4">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Community</div>
+              <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
+                Explorer Passport
+              </div>
+              <div className="mt-2 text-xs text-slate-300/90">Earn stamps, complete challenges, and join the mission.</div>
+              <Link to="/passport" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
                 Open
-              </Link>
-            </div>
-            <div className="glass-panel rounded-2xl p-4">
-              <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Travel</div>
-              <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
-                State-by-state hub
-              </div>
-              <div className="mt-2 text-xs text-slate-300/90">Maps, media, capitals, and planning links.</div>
-              <Link to="/states" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
-                Browse
-              </Link>
-            </div>
-            <div className="glass-panel rounded-2xl p-4">
-              <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Good news</div>
-              <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
-                Uplifting updates
-              </div>
-              <div className="mt-2 text-xs text-slate-300/90">Auto-updated headlines with source links.</div>
-              <Link to="/updates" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
-                Read
               </Link>
             </div>
           </div>

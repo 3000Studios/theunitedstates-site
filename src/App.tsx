@@ -21,6 +21,10 @@ const DisclaimerPage = lazy(async () => ({ default: (await import('@/pages/Discl
 const SearchPage = lazy(async () => ({ default: (await import('@/pages/SearchPage')).SearchPage }))
 const StoryPage = lazy(async () => ({ default: (await import('@/pages/StoryPage')).StoryPage }))
 const NotFoundPage = lazy(async () => ({ default: (await import('@/pages/NotFoundPage')).NotFoundPage }))
+const ExplorePage = lazy(async () => ({ default: (await import('@/pages/ExplorePage')).ExplorePage }))
+const ItineraryPage = lazy(async () => ({ default: (await import('@/pages/ItineraryPage')).ItineraryPage }))
+const PassportPage = lazy(async () => ({ default: (await import('@/pages/PassportPage')).PassportPage }))
+const MarketPage = lazy(async () => ({ default: (await import('@/pages/MarketPage')).MarketPage }))
 
 function PageFade({ children }: { children: ReactNode }) {
   return (
@@ -157,6 +161,38 @@ function AnimatedRoutes() {
           element={
             <PageFade>
               <StoryPage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            <PageFade>
+              <ExplorePage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/itinerary"
+          element={
+            <PageFade>
+              <ItineraryPage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/passport"
+          element={
+            <PageFade>
+              <PassportPage />
+            </PageFade>
+          }
+        />
+        <Route
+          path="/market"
+          element={
+            <PageFade>
+              <MarketPage />
             </PageFade>
           }
         />

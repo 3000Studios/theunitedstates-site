@@ -308,6 +308,36 @@ export class ContentStore implements DurableObject {
         updated_at TEXT NOT NULL
       );
     `)
+    sql.exec(`
+      CREATE TABLE IF NOT EXISTS user_profiles (
+        id TEXT PRIMARY KEY,
+        email TEXT UNIQUE,
+        xp INTEGER DEFAULT 0,
+        stamps_json TEXT,
+        preferences_json TEXT,
+        created_at TEXT NOT NULL
+      );
+    `)
+    sql.exec(`
+      CREATE TABLE IF NOT EXISTS ai_itineraries (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        title TEXT NOT NULL,
+        data_json TEXT NOT NULL,
+        created_at TEXT NOT NULL
+      );
+    `)
+    sql.exec(`
+      CREATE TABLE IF NOT EXISTS product_catalog (
+        id TEXT PRIMARY KEY,
+        state_slug TEXT,
+        title TEXT NOT NULL,
+        price_usd REAL,
+        affiliate_url TEXT,
+        image_url TEXT,
+        created_at TEXT NOT NULL
+      );
+    `)
   }
 
   async fetch(request: Request): Promise<Response> {
@@ -321,6 +351,21 @@ export class ContentStore implements DurableObject {
     }
     if (request.method === 'GET' && url.pathname.startsWith('/games/')) {
       return this.handleGame(url.pathname.split('/').pop() ?? '')
+    }
+    if (request.method === 'GET' && url.pathname === '/user') {
+      return this.handleGetUser(url.searchParams.get('id') ?? '')
+    }
+    if (request.method === 'POST' && url.pathname === '/user/update') {
+      return this.handleUpdateUser(request)
+    }
+    if (request.method === 'GET' && url.pathname === '/itineraries') {
+      return this.handleGetItineraries(url.searchParams.get('userId') ?? '')
+    }
+    if (request.method === 'POST' && url.pathname === '/itinerary/save') {
+      return this.handleSaveItinerary(request)
+    }
+    if (request.method === 'GET' && url.pathname === '/products') {
+      return this.handleGetProducts(url.searchParams.get('state') ?? '')
     }
     if (request.method === 'GET' && url.pathname === '/crypto') {
       return this.handleCrypto()
@@ -579,6 +624,83 @@ export class ContentStore implements DurableObject {
         game.updatedAt,
       )
     }
+  }
+
+  private async handleGetUser(id: string): Promise<Response> {
+    const safeId = String(id ?? '').trim()
+    if (!safeId) return new Response('Not found', { status: 404 })
+    const sql = this.state.storage.sql
+    const rows = sql.exec(`SELECT * FROM user_profiles WHERE id = ?1 LIMIT 1;`, safeId).toArray()
+    if (!rows[0]) return new Response(JSON.stringify({ user: null }), { headers: { 'content-type': 'application/json' } })
+    return new Response(JSON.stringify({ user: rows[0] }), { headers: { 'content-type': 'application/json' } })
+  }
+
+  private async handleUpdateUser(request: Request): Promise<Response> {
+    let p: any = null
+    try {
+      p = await request.json()
+    } catch {
+      return new Response('Bad request', { status: 400 })
+    }
+    const id = String(p?.id ?? '').trim()
+    if (!id) return new Response('ID required', { status: 400 })
+    const sql = this.state.storage.sql
+    const now = new Date().toISOString()
+    sql.exec(
+      `INSERT OR REPLACE INTO user_profiles(id, email, xp, stamps_json, preferences_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6);`,
+      id,
+      p.email ?? '',
+      p.xp ?? 0,
+      JSON.stringify(p.stamps ?? []),
+      JSON.stringify(p.preferences ?? {}),
+      now,
+    )
+    return new Response(JSON.stringify({ ok: true }), { headers: { 'content-type': 'application/json' } })
+  }
+
+  private async handleGetItineraries(userId: string): Promise<Response> {
+    const safeId = String(userId ?? '').trim()
+    if (!safeId) return new Response('User ID required', { status: 400 })
+    const sql = this.state.storage.sql
+    const rows = sql.exec(`SELECT * FROM ai_itineraries WHERE user_id = ?1 ORDER BY created_at DESC;`, safeId).toArray()
+    return new Response(JSON.stringify({ itineraries: rows }), { headers: { 'content-type': 'application/json' } })
+  }
+
+  private async handleSaveItinerary(request: Request): Promise<Response> {
+    let p: any = null
+    try {
+      p = await request.json()
+    } catch {
+      return new Response('Bad request', { status: 400 })
+    }
+    const id = crypto.randomUUID()
+    const sql = this.state.storage.sql
+    const now = new Date().toISOString()
+    sql.exec(
+      `INSERT INTO ai_itineraries(id, user_id, title, data_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5);`,
+      id,
+      p.userId,
+      p.title,
+      JSON.stringify(p.data),
+      now,
+    )
+    return new Response(JSON.stringify({ id, ok: true }), { headers: { 'content-type': 'application/json' } })
+  }
+
+  private async handleGetProducts(state: string): Promise<Response> {
+    const sql = this.state.storage.sql
+    let rows: any[] = []
+    if (state) {
+      rows = sql
+        .exec(
+          `SELECT * FROM product_catalog WHERE state_slug = ?1 OR state_slug IS NULL ORDER BY created_at DESC LIMIT 20;`,
+          state,
+        )
+        .toArray()
+    } else {
+      rows = sql.exec(`SELECT * FROM product_catalog ORDER BY created_at DESC LIMIT 20;`).toArray()
+    }
+    return new Response(JSON.stringify({ products: rows }), { headers: { 'content-type': 'application/json' } })
   }
 }
 
