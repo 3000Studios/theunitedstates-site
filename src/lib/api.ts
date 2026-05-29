@@ -34,13 +34,37 @@ export async function fetchCryptoMovers(): Promise<{ movers: CryptoMover[]; upda
   return { movers: data.movers, updatedAt: data.updatedAt }
 }
 
-export async function fetchUser(id: string) {
-  const res = await fetch(`/api/user?id=${encodeURIComponent(id)}`)
-  if (!res.ok) return null
-  return res.json()
+export type UserProfile = {
+  id: string
+  email?: string
+  xp?: number
+  stamps?: string[]
+  preferences?: Record<string, unknown>
 }
 
-export async function updateUser(userData: any) {
+export type Itinerary = {
+  userId: string
+  title: string
+  data: Record<string, unknown>
+}
+
+export type Product = {
+  id: string
+  title: string
+  description?: string
+  priceUsd?: number
+  url?: string
+  stateSlug?: string | null
+}
+
+export async function fetchUser(id: string): Promise<UserProfile | null> {
+  const res = await fetch(`/api/user?id=${encodeURIComponent(id)}`)
+  if (!res.ok) return null
+  const data = (await res.json()) as { user?: UserProfile | null }
+  return data?.user ?? null
+}
+
+export async function updateUser(userData: UserProfile): Promise<boolean> {
   const res = await fetch('/api/user/update', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -49,7 +73,7 @@ export async function updateUser(userData: any) {
   return res.ok
 }
 
-export async function saveItinerary(itinerary: any) {
+export async function saveItinerary(itinerary: Itinerary): Promise<{ id?: string; ok?: boolean }> {
   const res = await fetch('/api/itinerary/save', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -58,10 +82,10 @@ export async function saveItinerary(itinerary: any) {
   return res.json()
 }
 
-export async function fetchProducts(state?: string) {
+export async function fetchProducts(state?: string): Promise<Product[]> {
   const url = state ? `/api/products?state=${encodeURIComponent(state)}` : '/api/products'
   const res = await fetch(url)
   if (!res.ok) return []
-  const data = await res.json() as { products: any[] }
-  return data.products
+  const data = (await res.json()) as { products?: Product[] }
+  return Array.isArray(data?.products) ? data.products : []
 }

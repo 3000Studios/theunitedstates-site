@@ -636,7 +636,7 @@ export class ContentStore implements DurableObject {
   }
 
   private async handleUpdateUser(request: Request): Promise<Response> {
-    let p: any = null
+    let p: { id?: string; email?: string; xp?: number; stamps?: unknown[]; preferences?: unknown } | null = null
     try {
       p = await request.json()
     } catch {
@@ -667,7 +667,7 @@ export class ContentStore implements DurableObject {
   }
 
   private async handleSaveItinerary(request: Request): Promise<Response> {
-    let p: any = null
+    let p: { userId?: string; title?: string; data?: unknown } | null = null
     try {
       p = await request.json()
     } catch {
@@ -689,7 +689,7 @@ export class ContentStore implements DurableObject {
 
   private async handleGetProducts(state: string): Promise<Response> {
     const sql = this.state.storage.sql
-    let rows: any[] = []
+    let rows: Record<string, unknown>[] = []
     if (state) {
       rows = sql
         .exec(

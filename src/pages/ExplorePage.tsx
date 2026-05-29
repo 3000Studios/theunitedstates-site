@@ -6,23 +6,34 @@ import { Seo } from '@/components/seo/Seo'
 import { US_STATES } from '@/data/usStates'
 import { Link } from 'react-router-dom'
 
-function StatePin({ state, onSelect }: { state: any; onSelect: (s: any) => void }) {
+type UsState = (typeof US_STATES)[number]
+
+function StatePin({
+  state,
+  index,
+  count,
+  onSelect,
+}: {
+  state: UsState
+  index: number
+  count: number
+  onSelect: (s: UsState) => void
+}) {
   const [hovered, setHovered] = useState(false)
-  
-  // Approximate latitude/longitude to 3D sphere coordinates
-  // Note: This is a simplified projection for the "Dream Site" visual effect
+
+  // Distribute pins evenly across the sphere (golden-angle / Fibonacci sphere)
+  // so all 50 states are visible instead of overlapping at one point.
   const position = useMemo(() => {
-    const lat = state.latitude || 37 // Fallback to center US
-    const lon = state.longitude || -95
-    const phi = (90 - lat) * (Math.PI / 180)
-    const theta = (lon + 180) * (Math.PI / 180)
     const radius = 2.02
+    const y = 1 - (index / Math.max(count - 1, 1)) * 2
+    const r = Math.sqrt(Math.max(0, 1 - y * y))
+    const phi = index * Math.PI * (3 - Math.sqrt(5))
     return new THREE.Vector3(
-      -(radius * Math.sin(phi) * Math.cos(theta)),
-      radius * Math.cos(phi),
-      radius * Math.sin(phi) * Math.sin(theta)
+      radius * Math.cos(phi) * r,
+      radius * y,
+      radius * Math.sin(phi) * r,
     )
-  }, [state])
+  }, [index, count])
 
   return (
     <group position={position}>
@@ -74,7 +85,7 @@ function EarthModel() {
 }
 
 export function ExplorePage() {
-  const [selectedState, setSelectedState] = useState<any>(null)
+  const [selectedState, setSelectedState] = useState<UsState | null>(null)
 
   return (
     <>
@@ -103,8 +114,8 @@ export function ExplorePage() {
               
               <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
                 <EarthModel />
-                {US_STATES.map((st) => (
-                  <StatePin key={st.id} state={st} onSelect={setSelectedState} />
+                {US_STATES.map((st, i) => (
+                  <StatePin key={st.id} state={st} index={i} count={US_STATES.length} onSelect={setSelectedState} />
                 ))}
               </Float>
             </Suspense>
