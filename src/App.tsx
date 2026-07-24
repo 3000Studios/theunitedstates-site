@@ -24,7 +24,6 @@ const NotFoundPage = lazy(async () => ({ default: (await import('@/pages/NotFoun
 const ExplorePage = lazy(async () => ({ default: (await import('@/pages/ExplorePage')).ExplorePage }))
 const ItineraryPage = lazy(async () => ({ default: (await import('@/pages/ItineraryPage')).ItineraryPage }))
 const PassportPage = lazy(async () => ({ default: (await import('@/pages/PassportPage')).PassportPage }))
-const MarketPage = lazy(async () => ({ default: (await import('@/pages/MarketPage')).MarketPage }))
 
 function PageFade({ children }: { children: ReactNode }) {
   return (
@@ -189,12 +188,8 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/market"
-          element={
-            <PageFade>
-              <MarketPage />
-            </PageFade>
-          }
+          path="/privacy-policy"
+          element={<Navigate to="/privacy" replace />}
         />
 
         {/* Back-compat redirects */}
@@ -205,6 +200,7 @@ function AnimatedRoutes() {
         <Route path="/money" element={<Navigate to="/guides" replace />} />
         <Route path="/tech" element={<Navigate to="/guides" replace />} />
         <Route path="/store" element={<Navigate to="/about" replace />} />
+        <Route path="/market" element={<Navigate to="/guides" replace />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="/register" element={<Navigate to="/" replace />} />
         <Route path="/profile" element={<Navigate to="/" replace />} />

@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_ADSENSE_SLOT_SIDEBAR?: string
   readonly VITE_ADSENSE_SLOT_MOBILE_STICKY?: string
   readonly VITE_ADSENSE_SLOT_BETWEEN?: string
+  readonly VITE_EDITORIAL_FEED_ENABLED?: string
   readonly VITE_GA_MEASUREMENT_ID?: string
 }
 

@@ -15,7 +15,7 @@ export function UpdatesPage() {
     <>
       <Seo
         title="Good News Updates | The United States"
-        description="A chronological index of uplifting, family-friendly updates with sources."
+        description="Original, family-friendly travel and history explainers from The United States."
         path="/updates"
       />
 
@@ -24,7 +24,7 @@ export function UpdatesPage() {
           Updates
         </h1>
         <p className="mt-3 max-w-3xl text-base text-slate-300/90">
-          Chronological index (newest first). Every item links to a dedicated page with sources.
+          Original travel and history explainers, organized newest first. We link to primary sources where helpful.
         </p>
       </header>
 
@@ -72,7 +72,7 @@ export function UpdatesPage() {
           <div className="glass-panel rounded-3xl p-5">
             <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">How we publish</div>
             <p className="mt-3 text-xs leading-relaxed text-slate-400">
-              We pull headlines from reputable feeds and write a short, original summary with links back to the source.
+              We publish reader-first explainers and update them when a useful source or correction is available.
             </p>
           </div>
         </aside>

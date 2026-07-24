@@ -147,8 +147,7 @@ export function HomePage() {
             <span className="text-white">explore every state</span>
           </h1>
           <p className="hero-reveal mt-5 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-            Family-friendly destinations, history you can trust, and uplifting updates—designed to be fast, readable, and
-            ad-ready.
+            Family-friendly destinations, history you can trust, and practical reading designed to be fast and readable.
           </p>
           <div className="hero-reveal mt-4 inline-flex rounded-full border border-white/15 bg-black/25 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/85">
             Now playing: {USA_HERO_VIDEOS[heroIdx].title}
@@ -337,10 +336,10 @@ export function HomePage() {
             transition={{ duration: 0.8 }}
           />
           <div className="glass-panel rounded-3xl p-5">
-            <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Ad readiness</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Reader standards</div>
             <p className="mt-3 text-xs leading-relaxed text-slate-400">
-              This site ships with `ads.txt`, SEO metadata, and responsive ad slots sized for review. Add your AdSense
-              slot IDs as environment variables to activate placements.
+              We prioritize useful, original pages, transparent disclosures, and clearly labeled sources over intrusive
+              interruptions.
             </p>
           </div>
         </aside>

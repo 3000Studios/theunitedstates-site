@@ -15,7 +15,7 @@ export function ItineraryPage() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello! I'm your AI Trip Architect. Where in the United States would you like to explore? I can help you build a custom itinerary for any state or city.",
+      content: 'Start with a destination, number of days, and budget. I’ll help you turn those details into a simple trip-planning checklist.',
       timestamp: new Date()
     }
   ])
@@ -43,12 +43,12 @@ export function ItineraryPage() {
     setInput('')
     setIsTyping(true)
 
-    // Simulate AI response (In a real app, this calls the Worker API)
+    // This is intentionally a planning prompt, not a live AI service.
     setTimeout(() => {
       const assistantMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: `That sounds like a fantastic trip! Planning an adventure in ${input} is my specialty. I'll need to know a bit more: how many days are you staying, and what's your budget style (budget, mid-range, or luxury)?`,
+        content: `For ${input}, start by confirming your dates, how many days you have, and your budget range. Then use official tourism, park, and transit sources to verify hours, reservations, and accessibility before booking.`,
         timestamp: new Date()
       }
       setMessages(prev => [...prev, assistantMsg])
@@ -59,18 +59,18 @@ export function ItineraryPage() {
   return (
     <>
       <Seo
-        title="AI Trip Architect | Custom USA Itineraries"
-        description="Plan your perfect American adventure with our AI-powered travel assistant. Custom routes, hotel links, and local secrets."
+        title="Trip Planning Starter | The United States"
+        description="A simple starting point for planning a family-friendly trip in the United States."
         path="/itinerary"
       />
 
       <header className="mb-8">
-        <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Premium Utility</div>
+        <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Trip planning starter</div>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl font-extrabold text-white md:text-5xl">
-          AI Trip Architect
+          Plan a USA trip
         </h1>
         <p className="mt-3 max-w-3xl text-base text-slate-300/90">
-          Tell us where you want to go, and our AI will build a bookable, family-friendly itinerary in seconds.
+          Share a destination to get a practical planning prompt. Confirm all travel details with official sources before you book.
         </p>
       </header>
 
@@ -106,7 +106,7 @@ export function ItineraryPage() {
                   className="flex justify-start"
                 >
                   <div className="bg-white/5 border border-white/10 text-slate-400 rounded-full px-4 py-2 text-xs">
-                    Architect is thinking...
+                    Preparing your planning prompt...
                   </div>
                 </motion.div>
               )}
@@ -137,27 +137,15 @@ export function ItineraryPage() {
 
         <aside className="space-y-6">
           <div className="glass-panel rounded-3xl p-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Saved Itineraries</h3>
-            <p className="mt-4 text-sm text-slate-400">Sign in to save your AI-generated plans and sync them to your phone.</p>
-            <button className="mt-4 w-full rounded-2xl bg-white/5 border border-white/10 py-3 text-sm font-bold text-white hover:bg-white/10">
-              Sign In
-            </button>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Before you go</h3>
+            <p className="mt-4 text-sm text-slate-400">Check official park, transit, lodging, and tourism sites for current hours, reservations, safety notices, and accessibility information.</p>
           </div>
 
           <AdSlot slotKey="sidebar" className="hidden lg:block" />
 
           <div className="glass-panel rounded-3xl p-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Trip Stats</h3>
-            <div className="mt-4 space-y-3">
-              <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Plans generated today</span>
-                <span className="text-white font-bold">1,240</span>
-              </div>
-              <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Total bookings</span>
-                <span className="text-white font-bold">8,492</span>
-              </div>
-            </div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Useful details</h3>
+            <p className="mt-4 text-sm text-slate-400">Bring dates, group size, transportation, and a flexible budget to make your research more useful.</p>
           </div>
         </aside>
       </div>

@@ -2,6 +2,7 @@ import type { Article } from '@/lib/types'
 
 const STORAGE_KEY = 'tus_remote_stories_v1'
 const REFRESH_MS = import.meta.env.DEV ? 2 * 60 * 1000 : 30 * 60 * 1000
+const EDITORIAL_FEED_ENABLED = import.meta.env.VITE_EDITORIAL_FEED_ENABLED === 'true'
 
 function loadRemote(): Article[] {
   try {
@@ -40,6 +41,10 @@ function merge(seed: Article[], remote: Article[]): Article[] {
 let timer: ReturnType<typeof setInterval> | null = null
 
 export function startContentEngine(onUpdate: (all: Article[]) => void, seed: Article[]): () => void {
+  if (!EDITORIAL_FEED_ENABLED) {
+    onUpdate(seed)
+    return () => {}
+  }
   let cancelled = false
 
   const refresh = async () => {
@@ -66,6 +71,6 @@ export function startContentEngine(onUpdate: (all: Article[]) => void, seed: Art
 }
 
 export function getAllArticles(seed: Article[]): Article[] {
-  return merge(seed, loadRemote())
+  return EDITORIAL_FEED_ENABLED ? merge(seed, loadRemote()) : seed
 }
 
