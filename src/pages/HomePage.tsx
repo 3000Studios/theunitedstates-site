@@ -97,7 +97,7 @@ export function HomePage() {
     <>
       <Seo
         title="The United States of America | Travel, States, History, Good News"
-        description="Explore all 50 states (plus D.C.), plan family-friendly trips, and read uplifting updates—built for speed, trust, and advertiser safety."
+        description="Explore all 50 states plus D.C., plan family-friendly trips, and read useful history and travel updates."
         path="/"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -163,13 +163,13 @@ export function HomePage() {
               to="/itinerary"
               className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 hover:bg-white/10"
             >
-              AI Trip Architect
+              Trip Planning Starter
             </Link>
             <Link
               to="/passport"
               className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 hover:bg-white/10"
             >
-              Your Passport
+              State Checklist
             </Link>
           </div>
 
@@ -187,9 +187,9 @@ export function HomePage() {
             <div className="glass-panel rounded-2xl p-4">
               <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Planning</div>
               <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
-                AI Trip Architect
+                Trip Planning Starter
               </div>
-              <div className="mt-2 text-xs text-slate-300/90">Custom, bookable itineraries built for your family style.</div>
+              <div className="mt-2 text-xs text-slate-300/90">Turn destinations, dates, and budgets into a practical research checklist.</div>
               <Link to="/itinerary" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
                 Plan now
               </Link>
@@ -197,9 +197,9 @@ export function HomePage() {
             <div className="glass-panel rounded-2xl p-4">
               <div className="text-[11px] font-bold uppercase tracking-widest text-sky-200/80">Community</div>
               <div className="mt-2 font-[family-name:var(--font-display)] text-base font-extrabold text-white">
-                Explorer Passport
+                State Checklist
               </div>
-              <div className="mt-2 text-xs text-slate-300/90">Earn stamps, complete challenges, and join the mission.</div>
+              <div className="mt-2 text-xs text-slate-300/90">Track states to research, compare, or visit without creating an account.</div>
               <Link to="/passport" className="mt-3 inline-block text-xs font-semibold text-sky-200 hover:text-white">
                 Open
               </Link>

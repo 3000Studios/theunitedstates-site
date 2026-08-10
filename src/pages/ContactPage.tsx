@@ -93,8 +93,8 @@ export function ContactPage() {
             <li>Partnerships: company, goals, and timeline.</li>
           </ul>
           <p className="mt-6 text-slate-400">
-            For legal notices, use postal contact information you publish for your business entity when operating at
-            scale.
+            This form is the public contact path for editorial corrections and general site inquiries. Do not send
+            sensitive personal information, passwords, payment details, or emergency requests through this form.
           </p>
         </div>
       </div>

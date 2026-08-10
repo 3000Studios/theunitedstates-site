@@ -12,7 +12,7 @@ export function PrivacyPage() {
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-extrabold text-white md:text-5xl">
           Privacy Policy
         </h1>
-        <p className="mt-3 text-slate-400">Last updated: April 20, 2026</p>
+        <p className="mt-3 text-slate-400">Last updated: August 10, 2026</p>
       </header>
       <div className="space-y-6 text-sm leading-relaxed text-slate-200/90">
         <section className="glass-panel rounded-3xl p-6">
@@ -61,8 +61,8 @@ export function PrivacyPage() {
         <section className="glass-panel rounded-3xl p-6">
           <h2 className="text-lg font-extrabold text-white">Data retention</h2>
           <p className="mt-3">
-            Retention depends on the services configured. Configure retention windows inside your analytics and email
-            provider dashboards.
+            Contact and newsletter submissions are kept only as long as needed to respond, operate the service, and
+            maintain abuse prevention records. Analytics retention is managed in the applicable provider dashboard.
           </p>
         </section>
         <section className="glass-panel rounded-3xl p-6">

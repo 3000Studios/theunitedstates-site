@@ -7,7 +7,6 @@ import { TrendingTicker } from '@/components/layout/TrendingTicker'
 import { CustomCursor } from '@/components/effects/CustomCursor'
 import { SoundEffects } from '@/components/effects/SoundEffects'
 import { EagleFlyby } from '@/components/effects/EagleFlyby'
-import { NewsletterModal } from '@/components/layout/NewsletterModal'
 import { MobileStickyAd } from '@/components/ads/MobileStickyAd'
 import { initAnalytics, attachScrollDepthTracking, trackPageView } from '@/lib/analytics'
 
@@ -34,7 +33,6 @@ export function MainLayout({ children }: { children: ReactNode }) {
       <Header />
       <main className="mx-auto w-full max-w-[1600px] px-4 pb-28 pt-8 md:pb-12">{children}</main>
       <Footer />
-      <NewsletterModal />
       <MobileStickyAd />
     </div>
   )

@@ -90,8 +90,8 @@ export function ExplorePage() {
   return (
     <>
       <Seo
-        title="Immersive 3D USA Exploration | The United States"
-        description="Fly across the 50 states in an immersive 3D environment. Explore landmarks, live cams, and real-time state data."
+        title="3D State Explorer | The United States"
+        description="Browse a simple 3D globe interface and jump into state guides for the United States."
         path="/explore"
       />
 
@@ -132,19 +132,19 @@ export function ExplorePage() {
               <span className="gradient-text glow-text">Explore</span> America
             </h1>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-slate-300 md:text-base">
-              Interact with the 3D globe to discover states, landmarks, and real-time updates. Tap a pin to dive deep.
+              Interact with the 3D globe to discover state guide pages. Tap a pin to open a practical overview.
             </p>
           </header>
 
           <footer className="flex items-end justify-between">
             <div className="hero-reveal flex gap-4">
               <div className="glass-panel pointer-events-auto rounded-2xl p-4 backdrop-blur-xl">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-sky-200/80">Live Cams</div>
-                <div className="mt-1 font-bold text-white">124 Active</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-sky-200/80">Coverage</div>
+                <div className="mt-1 font-bold text-white">50 states + D.C.</div>
               </div>
               <div className="glass-panel pointer-events-auto rounded-2xl p-4 backdrop-blur-xl">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-sky-200/80">Weather</div>
-                <div className="mt-1 font-bold text-white">Live Doppler</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-sky-200/80">Focus</div>
+                <div className="mt-1 font-bold text-white">State guides</div>
               </div>
             </div>
           </footer>
@@ -187,20 +187,20 @@ export function ExplorePage() {
                     to="/itinerary"
                     className="flex w-full items-center justify-center rounded-2xl border border-white/10 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10"
                   >
-                    Plan Trip with AI
+                    Open Trip Planner
                   </Link>
                 </div>
 
                 <div className="mt-10">
-                  <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Real-time Data</div>
+                  <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Planning Notes</div>
                   <div className="mt-4 grid grid-cols-2 gap-3">
                     <div className="rounded-xl bg-white/5 p-3">
-                      <div className="text-[10px] text-slate-400">Temp</div>
-                      <div className="text-lg font-bold text-white">72°F</div>
+                      <div className="text-[10px] text-slate-400">Capital</div>
+                      <div className="text-lg font-bold text-white">{selectedState.capital}</div>
                     </div>
                     <div className="rounded-xl bg-white/5 p-3">
-                      <div className="text-[10px] text-slate-400">Status</div>
-                      <div className="text-lg font-bold text-emerald-400">Clear</div>
+                      <div className="text-[10px] text-slate-400">Guide</div>
+                      <div className="text-lg font-bold text-emerald-400">Available</div>
                     </div>
                   </div>
                 </div>
@@ -212,16 +212,16 @@ export function ExplorePage() {
 
       <section className="mt-12 grid gap-8 md:grid-cols-3">
         <div className="glass-panel rounded-3xl p-6">
-          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">Live Earth Cams</h3>
-          <p className="mt-2 text-sm text-slate-400">Stream live footage from National Parks and city centers across the USA.</p>
+          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">State Guide Links</h3>
+          <p className="mt-2 text-sm text-slate-400">Jump from the globe into pages with capitals, regions, and travel-planning context.</p>
         </div>
         <div className="glass-panel rounded-3xl p-6">
-          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">Historical Overlays</h3>
-          <p className="mt-2 text-sm text-slate-400">Toggle "1776 Mode" to see the original 13 colonies and historical trails.</p>
+          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">History Context</h3>
+          <p className="mt-2 text-sm text-slate-400">Use state pages and Constitution resources as starting points for primary-source reading.</p>
         </div>
         <div className="glass-panel rounded-3xl p-6">
-          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">Community Heatmap</h3>
-          <p className="mt-2 text-sm text-slate-400">See where other travelers are currently exploring and sharing stories.</p>
+          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">Family Research</h3>
+          <p className="mt-2 text-sm text-slate-400">Build a shortlist of places, parks, museums, and official sources before booking travel.</p>
         </div>
       </section>
     </>
