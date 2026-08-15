@@ -21,7 +21,7 @@ export function TrendingTicker() {
           >
             <span className="inline-block pr-24">
               {tags.map((t) => (
-                <Link key={t} to={`/search?q=${encodeURIComponent(t)}`} className="mr-6 inline hover:text-white">
+                <Link key={t} to={`/search?q=${encodeURIComponent(t)}`} className="mr-6 inline-flex min-h-11 items-center hover:text-white">
                   #{t}
                 </Link>
               ))}

@@ -33,3 +33,6 @@ firebase-service-account*.json
 .gitleaks-report.json
 .trivy-report.json
 .semgrep/
+
+# Local capture artifacts created by recording tools.
+*-RECORDING*

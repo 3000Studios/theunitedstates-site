@@ -48,7 +48,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-3 py-3">
-          <Link to="/" className="group flex items-center gap-2">
+          <Link to="/" className="group flex min-h-11 items-center gap-2">
             <WireframeMark />
             <span className="hidden flex-col leading-tight sm:flex">
               <span className="font-[family-name:var(--font-display)] text-base font-extrabold tracking-tight text-white">

@@ -15,16 +15,16 @@ export function Footer() {
           <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Explore</div>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/states">States</Link>
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/states">States</Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/updates">Updates</Link>
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/updates">Updates</Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/kids">Kid Zone</Link>
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/kids">Kid Zone</Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/constitution">Constitution</Link>
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/constitution">Constitution</Link>
             </li>
           </ul>
         </div>
@@ -32,27 +32,27 @@ export function Footer() {
           <div className="text-xs font-bold uppercase tracking-widest text-sky-200/80">Company</div>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/about">
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/about">
                 About
               </Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/contact">
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/contact">
                 Contact
               </Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/privacy">
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/privacy">
                 Privacy
               </Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/terms">
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/terms">
                 Terms
               </Link>
             </li>
             <li>
-              <Link className="text-slate-200/90 hover:text-white" to="/disclaimer">
+              <Link className="inline-flex min-h-11 items-center text-slate-200/90 hover:text-white" to="/disclaimer">
                 Disclaimer
               </Link>
             </li>
@@ -68,7 +68,7 @@ export function Footer() {
             href={PAYPAL_DONATE_URL}
             target="_blank"
             rel="noreferrer"
-            className="mt-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold text-white hover:bg-white/10"
+            className="mt-4 inline-flex min-h-11 items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold text-white hover:bg-white/10"
           >
             Fund the site with PayPal
           </a>
