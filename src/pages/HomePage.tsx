@@ -109,6 +109,11 @@ export function HomePage() {
 
       <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#050d1a]">
         <div className="absolute inset-0">
+          <img
+            src="/hero-cinematic.jpg"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-50"
+          />
           {USA_HERO_VIDEOS.map((video, i) => (
             <video
               key={video.file}
@@ -153,6 +158,14 @@ export function HomePage() {
             Now playing: {USA_HERO_VIDEOS[heroIdx].title}
           </div>
           <div className="hero-reveal mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="https://www.paypal.com/donate/?business=mr.jwswain%40gmail.com&no_recurring=0&item_name=Keep%20America%20Great%20%E2%80%94%20Support%20The%20United%20States%20Site&currency_code=USD"
+              className="inline-flex items-center justify-center rounded-2xl border border-amber-300/40 bg-amber-400/15 px-6 py-3 text-sm font-bold text-amber-100"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Support this site
+            </a>
             <Link
               to="/explore"
               className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/30"
