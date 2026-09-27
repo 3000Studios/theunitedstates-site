@@ -1,6 +1,8 @@
 import type { Article } from '@/lib/types'
+import { NEW_ARTICLES } from './newSeedArticles'
 
-export const SEED_ARTICLES: Article[] = [
+// The original 5 seed entries, kept byte-identical.
+const EXISTING_SEED_ARTICLES: Article[] = [
   {
     id: 'seed-welcome',
     slug: 'welcome-to-the-united-states',
@@ -117,4 +119,35 @@ export const SEED_ARTICLES: Article[] = [
     seoTitle: 'George Washington | The United States',
     seoDescription: 'A brief overview of George Washington (first President) plus family-friendly D.C. visit ideas.',
   },
+]
+
+// Each of the 15 new entries is paired with an image URL already used in this
+// file (Wikimedia Commons Special:FilePath). Loose topic fits are flagged with
+// a comment so better topic images can be sourced later. No URLs invented.
+const NEW_ARTICLE_IMAGES: Record<string, { image: string; imageCredit: string }> = {
+  'seed-america-the-beautiful-pass': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grand%20Canyon%20South%20Rim%20at%20Sunset.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-blue-ridge-parkway-highlights': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Interstate%2080%20from%20a%20parking%20lot%20in%20Wells%2C%20Nevada%20%282024%29%20-%200727.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-electoral-college-plain-english': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/United%20States%20Bill%20of%20Rights.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-grand-canyon-first-timers-guide': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grand%20Canyon%20South%20Rim%20at%20Sunset.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-great-lakes-which-one-first': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Interstate%2080%20from%20a%20parking%20lot%20in%20Wells%2C%20Nevada%20%282024%29%20-%200727.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-how-a-bill-becomes-a-law': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/United%20States%20Bill%20of%20Rights.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-midwest-small-towns-slow-weekend': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Interstate%2080%20from%20a%20parking%20lot%20in%20Wells%2C%20Nevada%20%282024%29%20-%200727.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-new-england-fall-foliage': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Interstate%2080%20from%20a%20parking%20lot%20in%20Wells%2C%20Nevada%20%282024%29%20-%200727.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-route-66-driving-guide': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Interstate%2080%20from%20a%20parking%20lot%20in%20Wells%2C%20Nevada%20%282024%29%20-%200727.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-savannah-vs-charleston': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Statue%20of%20Liberty%2C%20NY.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-state-fairs-american-tradition': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Statue%20of%20Liberty%2C%20NY.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-texas-bbq-trail': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Interstate%2080%20from%20a%20parking%20lot%20in%20Wells%2C%20Nevada%20%282024%29%20-%200727.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-utah-mighty-5-ranked': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grand%20Canyon%20South%20Rim%20at%20Sunset.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-voter-registration-state-by-state': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/United%20States%20Bill%20of%20Rights.jpg', imageCredit: 'Wikimedia Commons' },
+  'seed-washington-dc-on-a-budget': { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gilbert%20Stuart%20Williamstown%20Portrait%20of%20George%20Washington.jpg', imageCredit: 'Wikimedia Commons' },
+}
+
+const FALLBACK_IMAGE = {
+  image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Statue%20of%20Liberty%2C%20NY.jpg',
+  imageCredit: 'Wikimedia Commons',
+}
+
+export const SEED_ARTICLES: Article[] = [
+  ...EXISTING_SEED_ARTICLES,
+  ...NEW_ARTICLES.map((a) => ({ ...a, ...(NEW_ARTICLE_IMAGES[a.id] ?? FALLBACK_IMAGE) }) as Article),
 ]
