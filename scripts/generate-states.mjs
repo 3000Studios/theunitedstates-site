@@ -86,6 +86,17 @@ async function commonsSearchFiles(query) {
   return hits.map((h) => h.title).filter(Boolean)
 }
 
+// Curated hero-photo overrides (keyed by state abbreviation).
+// The alphabetical pick below can surface topically wrong images
+// (e.g. an 1868 election map for Alabama, a fast-food photo for Georgia),
+// so states listed here always use the specified Commons file instead —
+// a photo of the state capitol. Both files verified on Commons
+// (CC BY-SA 4.0, DXR); the page template credits the Commons file page.
+const HERO_PHOTO_OVERRIDES = {
+  AL: 'File:Alabama State Capitol, Montgomery, West view 20160713 1.jpg',
+  GA: 'File:Georgia State Capitol, Atlanta, West view 20160716 1.jpg',
+}
+
 function pickFirstByExtension(titles, exts) {
   const lowerExts = exts.map((e) => e.toLowerCase())
   const matches = titles.filter((t) => {
@@ -179,7 +190,8 @@ ORDER BY ?itemLabel
     }
 
     heroVideoFile = pickFirstByExtension(titles, ['webm', 'ogv', 'mp4'])
-    heroPhotoFile = pickFirstByExtension(titles, ['jpg', 'jpeg', 'png', 'webp'])
+    heroPhotoFile =
+      HERO_PHOTO_OVERRIDES[s.abbreviation] ?? pickFirstByExtension(titles, ['jpg', 'jpeg', 'png', 'webp'])
 
     enriched.push({
       id: s.abbreviation.toLowerCase(),
