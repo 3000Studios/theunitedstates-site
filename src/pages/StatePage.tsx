@@ -20,7 +20,7 @@ function commonsFilePage(fileTitle: string): string {
 export function StatePage() {
   const { slug } = useParams()
   const state = slug ? findStateBySlug(slug) : undefined
-  const pageContent = state ? STATE_PAGE_CONTENT.find((c) => c.slug === state.slug) : undefined
+  const pageContent = state ? STATE_PAGE_CONTENT.find((c) => c.slug === state.slug || c.slug === state.name.toLowerCase().replace(/\s+/g, '-')) : undefined
   const [cities, setCities] = useState<WikidataCity[] | null>(null)
 
   const stateQid = state?.wikidataQid ?? null
