@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Contact The United States for tips, corrections, partnerships, and press inquiries."
+    />
+    <meta name="google-adsense-account" content="ca-pub-5800977493749262" />
+    <meta name="theme-color" content="#0a1f44" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Contact | The United States</title>
+    <link rel="canonical" href="https://theunitedstates.site/contact" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5800977493749262"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body { margin: 0; background: #0a1f44; color: #e2e8f0; font-family: "Source Sans 3", system-ui, sans-serif; line-height: 1.65; }
+      .wrap { max-width: 1020px; margin: 0 auto; padding: 24px 18px 48px; }
+      header.site { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.14); padding-bottom: 16px; margin-bottom: 30px; }
+      header.site a.brand { color: #fff; font-family: "Playfair Display", serif; font-weight: 800; font-size: 1.35rem; text-decoration: none; }
+      nav a { color: #bae6fd; margin-left: 16px; text-decoration: none; font-weight: 600; }
+      nav a:hover { color: #fff; }
+      h1 { font-family: "Playfair Display", serif; font-weight: 800; color: #fff; font-size: 2.4rem; margin: 0 0 8px; }
+      .sub { color: #cbd5e1; margin: 0 0 26px; }
+      .grid { display: grid; gap: 24px; }
+      @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+      .panel { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 24px; }
+      .panel h2 { color: #fff; font-family: "Playfair Display", serif; font-size: 1.25rem; margin: 0 0 10px; }
+      .panel p { font-size: .95rem; }
+      .panel ul { margin: 0; padding-left: 20px; font-size: .95rem; }
+      .panel li { margin-bottom: 8px; }
+      label { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(186,230,253,.85); margin-bottom: 14px; }
+      input, textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; border-radius: 16px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); padding: 12px 16px; font-size: .95rem; color: #fff; font-family: inherit; }
+      button { width: 100%; border: 0; border-radius: 16px; padding: 12px; font-size: .95rem; font-weight: 700; color: #fff; background: linear-gradient(90deg, #0ea5e9, #4f46e5); cursor: pointer; }
+      button:disabled { opacity: .7; }
+      .ok { color: #6ee7b7; font-size: .95rem; }
+      .err { color: #fecdd3; font-size: .95rem; }
+      .fineprint { color: #94a3b8; margin-top: 24px; font-size: .95rem; }
+      footer { border-top: 1px solid rgba(255,255,255,.14); margin-top: 34px; padding-top: 18px; font-size: .9rem; color: #94a3b8; }
+      footer a { color: #bae6fd; margin-right: 16px; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site">
+        <a class="brand" href="/">The United States</a>
+        <nav>
+          <a href="/states">States</a>
+          <a href="/updates">Updates</a>
+          <a href="/guides">Trip Guides</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </header>
+
+      <h1>Contact</h1>
+      <p class="sub">Tips, corrections, and partnership inquiries.</p>
+
+      <div class="grid">
+        <form class="panel" id="contact-form">
+          <label>
+            Name
+            <input required name="name" autocomplete="name" />
+          </label>
+          <label>
+            Email
+            <input required type="email" name="email" autocomplete="email" />
+          </label>
+          <label>
+            Message
+            <textarea required rows="6" name="message"></textarea>
+          </label>
+          <button type="submit" id="contact-submit">Send</button>
+          <p class="ok" id="contact-sent" hidden>Thanks — we received your message.</p>
+          <p class="err" id="contact-error" hidden>Couldn’t send right now. Please try again.</p>
+        </form>
+
+        <div class="panel">
+          <h2>What to include</h2>
+          <ul>
+            <li>Corrections: link + what should change.</li>
+            <li>Tips: sources and timestamps when possible.</li>
+            <li>Partnerships: company, goals, and timeline.</li>
+          </ul>
+          <p class="fineprint">
+            This form is the public contact path for editorial corrections and general site inquiries. Do not send
+            sensitive personal information, passwords, payment details, or emergency requests through this form.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </footer>
+    </div>
+
+    <script>
+      // Same submission path as the app's Contact page: POST JSON to /api/contact.
+      document.getElementById('contact-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var form = e.target;
+        var button = document.getElementById('contact-submit');
+        var sent = document.getElementById('contact-sent');
+        var error = document.getElementById('contact-error');
+        sent.hidden = true;
+        error.hidden = true;
+        button.disabled = true;
+        button.textContent = 'Sending…';
+        try {
+          var res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              name: form.name.value.trim(),
+              email: form.email.value.trim(),
+              message: form.message.value.trim(),
+            }),
+          });
+          if (!res.ok) throw new Error('bad status');
+          form.reset();
+          button.textContent = 'Sent';
+          sent.hidden = false;
+        } catch (err) {
+          button.textContent = 'Send';
+          error.hidden = false;
+        } finally {
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
