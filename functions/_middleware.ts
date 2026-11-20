@@ -75,6 +75,10 @@ export const onRequest = async (context: PagesContext): Promise<Response> => {
     if (request.method !== 'GET' && request.method !== 'HEAD') return response;
     const url = new URL(request.url);
     if (url.pathname.startsWith('/api/')) return response;
+    // Published static legal archive (e.g. the 2026-10-26 cease-and-desist
+    // notice at /legal/notices/archive/2026/cease-and-desist/) is a real
+    // file, not an SPA route: serve it untouched, never 404 it.
+    if (url.pathname.startsWith('/legal/')) return response;
     if (isFilePath(url.pathname)) return response;
     if (isKnownRoute(url.pathname)) return response;
     const contentType = response.headers.get('content-type') || '';
