@@ -23,7 +23,8 @@ async function main() {
   const stateSource = await fs.readFile(path.join(repoRoot, 'src', 'data', 'usStates.generated.ts'), 'utf8')
   const states = [...stateSource.matchAll(/^\s*["']?slug["']?\s*:\s*['\"]([^'\"]+)['\"]/gm)].map((match) => match[1])
   const storySource = await fs.readFile(path.join(repoRoot, 'src', 'data', 'seedArticles.ts'), 'utf8')
-  const stories = [...storySource.matchAll(/^\s*slug:\s*['\"]([^'\"]+)['\"]/gm)].map((match) => match[1])
+  const newStorySource = await fs.readFile(path.join(repoRoot, 'src', 'data', 'newSeedArticles.ts'), 'utf8')
+  const stories = [...(storySource + newStorySource).matchAll(/^\s*slug:\s*['\"]([^'\"]+)['\"]/gm)].map((match) => match[1])
 
   const lines = []
   lines.push('<?xml version="1.0" encoding="UTF-8"?>')

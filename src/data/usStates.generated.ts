@@ -44,8 +44,8 @@ export const US_STATES_GENERATED: USStateGenerated[] = [
     },
     "heroVideo": null,
     "heroPhoto": {
-      "file": "File:1868 United States Presidential Election in Alabama Map by County.png",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/1868%20United%20States%20Presidential%20Election%20in%20Alabama%20Map%20by%20County.png",
+      "file": "File:Alabama State Capitol, Montgomery, West view 20160713 1.jpg",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Alabama%20State%20Capitol%2C%20Montgomery%2C%20West%20view%2020160713%201.jpg",
       "source": "Wikimedia Commons"
     }
   },
@@ -308,8 +308,8 @@ export const US_STATES_GENERATED: USStateGenerated[] = [
     },
     "heroVideo": null,
     "heroPhoto": {
-      "file": "File:A Bojangles fast food restaurant in Hiawassee, Georgia, United States 01.jpg",
-      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/A%20Bojangles%20fast%20food%20restaurant%20in%20Hiawassee%2C%20Georgia%2C%20United%20States%2001.jpg",
+      "file": "File:Georgia State Capitol, Atlanta, West view 20160716 1.jpg",
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Georgia%20State%20Capitol%2C%20Atlanta%2C%20West%20view%2020160716%201.jpg",
       "source": "Wikimedia Commons"
     }
   },
